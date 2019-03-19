@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/labstack/higo"
+	"github.com/sereiner/parrot/servers/higo"
 	"github.com/stretchr/testify/assert"
 )
 

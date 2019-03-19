@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
-	"github.com/sereiner/higo"
+	"github.com/sereiner/parrot/servers/higo"
 )
 
 type LimitConfig struct {
@@ -17,7 +17,7 @@ type LimitConfig struct {
 var (
 	DefaultLimitConfig = LimitConfig{
 		Skipper: DefaultSkipper,
-		lmt:     tollbooth.NewLimiter(200, nil),
+		lmt:     tollbooth.NewLimiter(2000, nil),
 	}
 )
 

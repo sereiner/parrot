@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/labstack/gommon/color"
-	"github.com/sereiner/higo"
+	"github.com/sereiner/parrot/servers/higo"
 	"github.com/valyala/fasttemplate"
 )
 

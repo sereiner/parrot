@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/sereiner/higo"
+	"github.com/sereiner/parrot/servers/higo"
 	"github.com/stretchr/testify/assert"
 )
 

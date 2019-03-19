@@ -3,15 +3,16 @@ package main
 import (
 	"net/http"
 
-	"github.com/sereiner/higo/middleware"
+	"github.com/sereiner/parrot/servers/higo/middleware"
 
-	"github.com/sereiner/higo"
+	"github.com/sereiner/parrot/servers/higo"
 )
 
 func main() {
 	// Setup
 	e := higo.New()
 	e.Use(middleware.Logger())
+	e.Use(middleware.Limit())
 	e.GET("/", func(c higo.Context) error {
 		c.Logger().Info("ok")
 		return c.JSON(http.StatusOK, "OK")

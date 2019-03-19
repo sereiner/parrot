@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/sereiner/higo"
+	"github.com/sereiner/parrot/servers/higo"
 )
 
 type (

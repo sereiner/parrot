@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/labstack/gommon/bytes"
-	"github.com/sereiner/higo"
+	"github.com/sereiner/parrot/servers/higo"
 )
 
 type (
