@@ -3,9 +3,11 @@ package selector
 import (
 	"context"
 	"errors"
-	"github.com/megaredfan/rpc-demo/registry"
+
 	"math/rand"
 	"time"
+
+	"github.com/sereiner/parrot/servers/rpc/registry"
 )
 
 func init() {

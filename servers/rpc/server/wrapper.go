@@ -2,8 +2,9 @@ package server
 
 import (
 	"context"
-	"github.com/megaredfan/rpc-demo/protocol"
-	"github.com/megaredfan/rpc-demo/transport"
+
+	"github.com/sereiner/parrot/servers/rpc/protocol"
+	"github.com/sereiner/parrot/servers/rpc/transport"
 )
 
 type ServeFunc func(network string, addr string) error

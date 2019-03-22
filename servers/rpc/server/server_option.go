@@ -1,11 +1,12 @@
 package server
 
 import (
-	"github.com/megaredfan/rpc-demo/codec"
-	"github.com/megaredfan/rpc-demo/protocol"
-	"github.com/megaredfan/rpc-demo/registry"
-	"github.com/megaredfan/rpc-demo/transport"
 	"time"
+
+	"github.com/sereiner/parrot/servers/rpc/codec"
+	"github.com/sereiner/parrot/servers/rpc/protocol"
+	"github.com/sereiner/parrot/servers/rpc/registry"
+	"github.com/sereiner/parrot/servers/rpc/transport"
 )
 
 type Option struct {

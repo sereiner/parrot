@@ -3,14 +3,16 @@ package client
 import (
 	"context"
 	"errors"
-	"github.com/megaredfan/rpc-demo/codec"
-	"github.com/megaredfan/rpc-demo/protocol"
-	"github.com/megaredfan/rpc-demo/transport"
+
 	"io"
 	"log"
 	"strings"
 	"sync"
 	"sync/atomic"
+
+	"github.com/sereiner/parrot/servers/rpc/codec"
+	"github.com/sereiner/parrot/servers/rpc/protocol"
+	"github.com/sereiner/parrot/servers/rpc/transport"
 )
 
 var ErrorShutdown = errors.New("client is shut down")

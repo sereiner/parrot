@@ -2,9 +2,11 @@ package client
 
 import (
 	"context"
-	"github.com/megaredfan/rpc-demo/protocol"
+
 	"log"
 	"time"
+
+	"github.com/sereiner/parrot/servers/rpc/protocol"
 )
 
 type MetaDataWrapper struct {

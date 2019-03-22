@@ -2,9 +2,11 @@ package client
 
 import (
 	"context"
-	"github.com/megaredfan/rpc-demo/registry"
+
 	"log"
 	"sync"
+
+	"github.com/sereiner/parrot/servers/rpc/registry"
 )
 
 type SGClient interface {

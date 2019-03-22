@@ -3,9 +3,7 @@ package server
 import (
 	"context"
 	"errors"
-	"github.com/megaredfan/rpc-demo/codec"
-	"github.com/megaredfan/rpc-demo/protocol"
-	"github.com/megaredfan/rpc-demo/transport"
+
 	"io"
 	"log"
 	"reflect"
@@ -14,6 +12,10 @@ import (
 	"time"
 	"unicode"
 	"unicode/utf8"
+
+	"github.com/sereiner/parrot/servers/rpc/codec"
+	"github.com/sereiner/parrot/servers/rpc/protocol"
+	"github.com/sereiner/parrot/servers/rpc/transport"
 )
 
 type RPCServer interface {
@@ -28,6 +30,7 @@ type ServiceInfo struct {
 	Methods []string `json:"methods"`
 }
 
+//SGServer  service governance Server
 type SGServer struct {
 	codec            codec.Codec
 	serviceMap       sync.Map

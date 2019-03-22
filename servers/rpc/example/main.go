@@ -2,16 +2,18 @@ package main
 
 import (
 	"context"
-	"github.com/megaredfan/rpc-demo/client"
-	"github.com/megaredfan/rpc-demo/codec"
-	"github.com/megaredfan/rpc-demo/registry"
-	"github.com/megaredfan/rpc-demo/registry/memory"
-	"github.com/megaredfan/rpc-demo/server"
-	"github.com/megaredfan/rpc-demo/service"
+
 	"log"
 	"math/rand"
 	"strconv"
 	"time"
+
+	"github.com/sereiner/parrot/servers/rpc/client"
+	"github.com/sereiner/parrot/servers/rpc/codec"
+	"github.com/sereiner/parrot/servers/rpc/registry"
+	"github.com/sereiner/parrot/servers/rpc/registry/memory"
+	"github.com/sereiner/parrot/servers/rpc/server"
+	"github.com/sereiner/parrot/servers/rpc/service"
 )
 
 const callTimes = 1

@@ -3,6 +3,7 @@ package codec
 import (
 	"bytes"
 	"encoding/gob"
+
 	"github.com/vmihailenco/msgpack"
 )
 

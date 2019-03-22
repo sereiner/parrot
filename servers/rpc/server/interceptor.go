@@ -3,14 +3,16 @@ package server
 import (
 	"context"
 	"encoding/json"
-	"github.com/megaredfan/rpc-demo/protocol"
-	"github.com/megaredfan/rpc-demo/registry"
-	"github.com/megaredfan/rpc-demo/transport"
+
 	"log"
 	"os"
 	"os/signal"
 	"sync/atomic"
 	"syscall"
+
+	"github.com/sereiner/parrot/servers/rpc/protocol"
+	"github.com/sereiner/parrot/servers/rpc/registry"
+	"github.com/sereiner/parrot/servers/rpc/transport"
 )
 
 type DefaultServerWrapper struct {

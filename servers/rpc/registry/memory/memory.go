@@ -2,8 +2,10 @@ package memory
 
 import (
 	"errors"
+
 	"github.com/google/uuid"
-	"github.com/megaredfan/rpc-demo/registry"
+	"github.com/sereiner/parrot/servers/rpc/registry"
+
 	"sync"
 	"time"
 )

@@ -3,10 +3,12 @@ package protocol
 import (
 	"encoding/binary"
 	"errors"
-	"github.com/megaredfan/rpc-demo/codec"
-	"github.com/vmihailenco/msgpack"
+
 	"io"
 	"time"
+
+	"github.com/sereiner/parrot/servers/rpc/codec"
+	"github.com/vmihailenco/msgpack"
 )
 
 //-------------------------------------------------------------------------------------------------

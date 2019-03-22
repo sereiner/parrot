@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/megaredfan/rpc-demo/codec"
 	"testing"
+
+	"github.com/sereiner/parrot/servers/rpc/codec"
 )
 
 func BenchmarkMakeCallGOB(b *testing.B) {
