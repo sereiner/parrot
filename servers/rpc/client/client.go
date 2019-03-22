@@ -11,7 +11,6 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
-	"time"
 )
 
 var ErrorShutdown = errors.New("client is shut down")
@@ -20,6 +19,7 @@ type RPCClient interface {
 	Go(ctx context.Context, serviceMethod string, arg interface{}, reply interface{}, done chan *Call) *Call
 	Call(ctx context.Context, serviceMethod string, arg interface{}, reply interface{}) error
 	Close() error
+	IsShutDown() bool
 }
 
 type Call struct {
@@ -40,6 +40,10 @@ type simpleClient struct {
 	seq          uint64
 }
 
+func (c *simpleClient) IsShutDown() bool {
+	return c.shutdown
+}
+
 func NewRPCClient(network string, addr string, option Option) (RPCClient, error) {
 	client := new(simpleClient)
 	client.option = option
@@ -47,7 +51,7 @@ func NewRPCClient(network string, addr string, option Option) (RPCClient, error)
 	client.codec = codec.GetCodec(option.SerializeType)
 
 	tr := transport.NewTransport(option.TransportType)
-	err := tr.Dial(network, addr)
+	err := tr.Dial(network, addr, transport.DialOption{Timeout: option.DialTimeout})
 	if err != nil {
 		return nil, err
 	}
@@ -55,6 +59,7 @@ func NewRPCClient(network string, addr string, option Option) (RPCClient, error)
 	client.rwc = tr
 
 	go client.input()
+	//log.Printf("connected to %s@%s", network, addr)
 	return client, nil
 }
 
@@ -86,25 +91,24 @@ func (c *simpleClient) Call(ctx context.Context, serviceMethod string, args inte
 	seq := atomic.AddUint64(&c.seq, 1)
 	ctx = context.WithValue(ctx, protocol.RequestSeqKey, seq)
 
-	canFn := func() {}
-	if c.option.RequestTimeout != time.Duration(0) {
-		ctx, canFn = context.WithTimeout(ctx, c.option.RequestTimeout)
-		metaDataInterface := ctx.Value(protocol.MetaDataKey)
-		var metaData map[string]string
-		if metaDataInterface == nil {
-			metaData = make(map[string]string)
-		} else {
-			metaData = metaDataInterface.(map[string]string)
-		}
-		metaData[protocol.RequestTimeoutKey] = c.option.RequestTimeout.String()
-		ctx = context.WithValue(ctx, protocol.MetaDataKey, metaData)
-	}
+	//canFn := func() {}
+	//if c.option.RequestTimeout != time.Duration(0) {
+	//	ctx, canFn = context.WithTimeout(ctx, c.option.RequestTimeout)
+	//	metaDataInterface := ctx.Value(protocol.MetaDataKey)
+	//	var metaData map[string]string
+	//	if metaDataInterface == nil {
+	//		metaData = make(map[string]string)
+	//	} else {
+	//		metaData = metaDataInterface.(map[string]string)
+	//	}
+	//	metaData[protocol.RequestTimeoutKey] = c.option.RequestTimeout.String()
+	//	ctx = context.WithValue(ctx, protocol.MetaDataKey, metaData)
+	//}
 
 	done := make(chan *Call, 1)
 	call := c.Go(ctx, serviceMethod, args, reply, done)
 	select {
 	case <-ctx.Done():
-		canFn()
 		c.pendingCalls.Delete(seq)
 		call.Error = errors.New("client request time out")
 	case <-call.Done:
@@ -132,7 +136,6 @@ func (c *simpleClient) Close() error {
 
 func (c *simpleClient) send(ctx context.Context, call *Call) {
 	seq := ctx.Value(protocol.RequestSeqKey).(uint64)
-
 	c.pendingCalls.Store(seq, call)
 
 	request := protocol.NewMessage(c.option.ProtocolType)
@@ -141,15 +144,15 @@ func (c *simpleClient) send(ctx context.Context, call *Call) {
 	serviceMethod := strings.SplitN(call.ServiceMethod, ".", 2)
 	request.ServiceName = serviceMethod[0]
 	request.MethodName = serviceMethod[1]
-	request.SerializeType = codec.MessagePack
-	request.CompressType = protocol.CompressTypeNone
+	request.SerializeType = c.option.SerializeType
+	request.CompressType = c.option.CompressType
 	if ctx.Value(protocol.MetaDataKey) != nil {
-		request.MetaData = ctx.Value(protocol.MetaDataKey).(map[string]string)
+		request.MetaData = ctx.Value(protocol.MetaDataKey).(map[string]interface{})
 	}
 
 	requestData, err := c.codec.Encode(call.Args)
 	if err != nil {
-		log.Println(err)
+		log.Println("client encode error:" + err.Error())
 		c.pendingCalls.Delete(seq)
 		call.Error = err
 		call.done()
@@ -161,7 +164,7 @@ func (c *simpleClient) send(ctx context.Context, call *Call) {
 
 	_, err = c.rwc.Write(data)
 	if err != nil {
-		log.Println(err)
+		log.Println("client write error:" + err.Error())
 		c.pendingCalls.Delete(seq)
 		call.Error = err
 		call.done()
@@ -179,15 +182,23 @@ func (c *simpleClient) input() {
 		}
 
 		seq := response.Seq
-		callInterface, _ := c.pendingCalls.Load(seq)
+		callInterface, ok := c.pendingCalls.Load(seq)
+		if !ok {
+			//请求已经被清理掉了，可能是已经超时了
+			continue
+		}
+
 		call := callInterface.(*Call)
+		have := response.ServiceName + "." + response.MethodName
+		want := call.ServiceMethod
+		if have != want {
+			log.Fatalf("servicemethod not equal! have:%s, want:%s", have, want)
+		}
 		c.pendingCalls.Delete(seq)
 
 		switch {
-		case call == nil:
-			//请求已经被清理掉了，可能是已经超时了
 		case response.Error != "":
-			call.Error = errors.New(response.Error)
+			call.Error = ServiceError(response.Error)
 			call.done()
 		default:
 			err = c.codec.Decode(response.Data, call.Reply)
@@ -197,4 +208,6 @@ func (c *simpleClient) input() {
 			call.done()
 		}
 	}
+	log.Println("input error, closing client, error: " + err.Error())
+	c.Close()
 }
