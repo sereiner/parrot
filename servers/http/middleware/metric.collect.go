@@ -4,11 +4,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/sereiner/lib/metrics"
-	"github.com/sereiner/lib/sysinfo/cpu"
-	"github.com/sereiner/lib/sysinfo/disk"
-	"github.com/sereiner/lib/sysinfo/memory"
-	"github.com/sereiner/lib/sysinfo/pipes"
+	"github.com/sereiner/library/metrics"
+	"github.com/sereiner/library/sysinfo/cpu"
+	"github.com/sereiner/library/sysinfo/disk"
+	"github.com/sereiner/library/sysinfo/memory"
+	"github.com/sereiner/library/sysinfo/pipes"
 )
 
 func (m *Metric) collectCPU() {

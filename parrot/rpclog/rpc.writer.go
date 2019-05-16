@@ -7,7 +7,7 @@ import (
 
 	"github.com/golang/snappy"
 	"github.com/sereiner/parrot/rpc"
-	"github.com/sereiner/lib/encoding/base64"
+	"github.com/sereiner/library/encoding/base64"
 )
 
 type rpcWriter struct {

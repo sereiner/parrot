@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/sereiner/lib/file"
+	"github.com/sereiner/library/file"
 )
 
 var components = make(map[string]ServiceLoader)

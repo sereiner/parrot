@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
-	"github.com/sereiner/lib/security/jwt"
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/security/jwt"
+	"github.com/sereiner/library/types"
 )
 
 //JwtAuth jwt

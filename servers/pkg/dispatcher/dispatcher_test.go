@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/sereiner/parrot/servers/rpc/standard/pb"
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 func TestEngine(t *testing.T) {

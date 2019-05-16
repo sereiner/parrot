@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/sereiner/lib/rpc"
+	"github.com/sereiner/library/rpc"
 )
 
 //AsyncRequest 发起异步Request请求

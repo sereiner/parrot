@@ -3,7 +3,7 @@ package context
 import (
 	"testing"
 
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 type input struct {

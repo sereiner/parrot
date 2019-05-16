@@ -12,7 +12,7 @@ import (
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/servers"
-	"github.com/sereiner/lib/encoding"
+	"github.com/sereiner/library/encoding"
 	logger "github.com/sereiner/log"
 )
 

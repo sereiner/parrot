@@ -8,7 +8,7 @@ import (
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/pkg/middleware"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/net"
+	"github.com/sereiner/library/net"
 )
 
 //CronServer cron服务器

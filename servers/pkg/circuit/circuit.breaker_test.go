@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 func TestForceOpen1(t *testing.T) {

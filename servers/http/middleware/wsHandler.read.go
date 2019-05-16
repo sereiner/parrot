@@ -14,7 +14,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/servers"
-	"github.com/sereiner/lib/jsons"
+	"github.com/sereiner/library/jsons"
 )
 
 const (

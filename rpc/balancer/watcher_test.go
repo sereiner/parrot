@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 type testfileChecker struct {

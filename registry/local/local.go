@@ -15,7 +15,7 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	r "github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/registry"
+	"github.com/sereiner/library/registry"
 )
 
 var _ r.IRegistry = &local{}

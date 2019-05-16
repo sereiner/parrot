@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/sereiner/parrot/context"
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 //CPUUPCollect CPU使用率收集

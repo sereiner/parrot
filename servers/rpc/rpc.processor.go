@@ -5,7 +5,7 @@ import (
 
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/parrot/servers/rpc/pb"
-	"github.com/sereiner/lib/jsons"
+	"github.com/sereiner/library/jsons"
 )
 
 type Processor struct {

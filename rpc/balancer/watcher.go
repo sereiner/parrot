@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/sereiner/parrot/registry"
-	r "github.com/sereiner/lib/registry"
+	r "github.com/sereiner/library/registry"
 
 	"sort"
 

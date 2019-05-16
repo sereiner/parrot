@@ -6,7 +6,7 @@ package component
 // 	"plugin"
 // 	"sync"
 
-// 	"github.com/sereiner/lib/file"
+// 	"github.com/sereiner/library/file"
 // )
 
 // type funcDecrypt func(string) (string, error)

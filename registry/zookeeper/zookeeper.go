@@ -6,7 +6,7 @@ import (
 
 	"github.com/sereiner/parrot/registry"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/zk"
+	"github.com/sereiner/library/zk"
 )
 
 //zkRegistry 基于zookeeper的注册中心

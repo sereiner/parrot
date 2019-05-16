@@ -1,7 +1,7 @@
 package rpc
 
 import "testing"
-import "github.com/sereiner/lib/ut"
+import "github.com/sereiner/library/ut"
 
 func TestFactoryResolvePath(t *testing.T) {
 	def_domain := "parrot"

@@ -6,9 +6,9 @@ import (
 
 	"strings"
 
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/registry"
+	"github.com/sereiner/library/registry"
 )
 
 //IRegistry 注册中心接口,通过扩展支持zookeeper,consul,etcd

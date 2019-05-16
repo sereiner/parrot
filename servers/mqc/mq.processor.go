@@ -5,7 +5,7 @@ import (
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
-	"github.com/sereiner/lib/mq"
+	"github.com/sereiner/library/mq"
 )
 
 type Processor struct {

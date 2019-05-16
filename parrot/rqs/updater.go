@@ -17,8 +17,8 @@ import (
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/registry"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/osext"
-	"github.com/sereiner/lib/security/crc32"
+	"github.com/sereiner/library/osext"
+	"github.com/sereiner/library/security/crc32"
 	"github.com/zkfy/archiver"
 )
 

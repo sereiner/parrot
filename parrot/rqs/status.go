@@ -10,11 +10,11 @@ import (
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/servers"
 
-	"github.com/sereiner/lib/jsons"
-	"github.com/sereiner/lib/net"
-	"github.com/sereiner/lib/sysinfo/cpu"
-	"github.com/sereiner/lib/sysinfo/disk"
-	"github.com/sereiner/lib/sysinfo/memory"
+	"github.com/sereiner/library/jsons"
+	"github.com/sereiner/library/net"
+	"github.com/sereiner/library/sysinfo/cpu"
+	"github.com/sereiner/library/sysinfo/disk"
+	"github.com/sereiner/library/sysinfo/memory"
 	logger "github.com/sereiner/log"
 	"github.com/sereiner/parrot/servers/http"
 )

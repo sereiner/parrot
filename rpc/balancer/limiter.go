@@ -1,7 +1,7 @@
 package balancer
 
-import "github.com/sereiner/lib/metrics"
-import "github.com/sereiner/lib/concurrent/cmap"
+import "github.com/sereiner/library/metrics"
+import "github.com/sereiner/library/concurrent/cmap"
 
 //Limiter 限流组件,用于限制客户端每分钟请求服务器的数量,当超过限制数量时不再选择该服务提供者
 type Limiter struct {

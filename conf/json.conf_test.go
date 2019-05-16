@@ -3,7 +3,7 @@ package conf
 import (
 	"testing"
 
-	"github.com/sereiner/lib/ut"
+	"github.com/sereiner/library/ut"
 )
 
 func TestJsonConfNew(t *testing.T) {

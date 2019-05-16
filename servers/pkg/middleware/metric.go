@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/sereiner/lib/xsync"
+	"github.com/sereiner/library/xsync"
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/parrot/servers/pkg/timer"
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/metrics"
-	"github.com/sereiner/lib/net"
+	"github.com/sereiner/library/metrics"
+	"github.com/sereiner/library/net"
 )
 
 type reporter struct {

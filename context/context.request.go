@@ -9,9 +9,9 @@ import (
 
 	"github.com/asaskevich/govalidator"
 
-	"github.com/sereiner/lib/net"
-	"github.com/sereiner/lib/security/md5"
-	"github.com/sereiner/lib/utility"
+	"github.com/sereiner/library/net"
+	"github.com/sereiner/library/security/md5"
+	"github.com/sereiner/library/utility"
 )
 
 type IData interface {

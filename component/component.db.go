@@ -6,8 +6,8 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/concurrent/cmap"
-	"github.com/sereiner/lib/db"
+	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/library/db"
 )
 
 //DBTypeNameInVar DB在var配置中的类型名称

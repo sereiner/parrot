@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/jsons"
+	"github.com/sereiner/library/jsons"
 )
 
 //publish 将当前服务器的节点信息发布到注册中心

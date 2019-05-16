@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sereiner/lib/jsons"
+	"github.com/sereiner/library/jsons"
 	logger "github.com/sereiner/log"
 	"github.com/zkfy/log"
 )

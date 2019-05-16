@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/sereiner/parrot/rpc/balancer"
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 	logger "github.com/sereiner/log"
 )
 

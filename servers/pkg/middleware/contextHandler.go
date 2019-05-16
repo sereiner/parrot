@@ -13,7 +13,7 @@ import (
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
-	"github.com/sereiner/lib/encoding/base64"
+	"github.com/sereiner/library/encoding/base64"
 	logger "github.com/sereiner/log"
 )
 

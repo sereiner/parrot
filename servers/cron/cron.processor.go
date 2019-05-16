@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
-	"github.com/sereiner/lib/concurrent/cmap"
-	"github.com/sereiner/lib/redis"
-	"github.com/sereiner/lib/utility"
+	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/library/redis"
+	"github.com/sereiner/library/utility"
 )
 
 //Processor 任务处理程序

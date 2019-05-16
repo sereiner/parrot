@@ -1,7 +1,7 @@
 package context
 
 import (
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 )
 
 //IResponse 响应

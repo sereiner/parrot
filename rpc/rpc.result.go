@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sereiner/lib/rpc"
+	"github.com/sereiner/library/rpc"
 )
 
 //Response 异步请求的响应内容

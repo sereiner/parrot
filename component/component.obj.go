@@ -5,7 +5,7 @@ import (
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 )
 
 var _ IComponentGlobalVarObject = &GlobalVarObjectCache{}

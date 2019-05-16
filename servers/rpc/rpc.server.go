@@ -12,7 +12,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/rpc/pb"
-	xnet "github.com/sereiner/lib/net"
+	xnet "github.com/sereiner/library/net"
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/middleware"

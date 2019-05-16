@@ -15,7 +15,7 @@ import (
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/http/middleware"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/net"
+	"github.com/sereiner/library/net"
 )
 
 //ApiServer api服务器

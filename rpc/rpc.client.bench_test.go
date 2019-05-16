@@ -1,7 +1,7 @@
 package rpc
 
 import "testing"
-import "github.com/sereiner/lib/ut"
+import "github.com/sereiner/library/ut"
 
 var invoker = NewRPCInvoker("/parrot", "merchant_api", "zk://192.168.106.172")
 

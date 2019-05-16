@@ -7,7 +7,7 @@ import (
 
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 )
 
 //RPCProxy rpc 代理服务

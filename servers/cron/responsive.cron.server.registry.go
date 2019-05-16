@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/sereiner/parrot/servers"
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 )
 
 func (s *CronResponsiveServer) watchMasterChange(root, path string) error {

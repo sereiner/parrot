@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/conf"

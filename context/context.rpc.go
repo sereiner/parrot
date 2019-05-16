@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sereiner/lib/jsons"
-	"github.com/sereiner/lib/rpc"
+	"github.com/sereiner/library/jsons"
+	"github.com/sereiner/library/rpc"
 )
 
 type RPCInvoker interface {

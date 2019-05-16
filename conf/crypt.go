@@ -5,7 +5,7 @@ import (
 
 	"encoding/hex"
 
-	"github.com/sereiner/lib/security/des"
+	"github.com/sereiner/library/security/des"
 )
 
 const confKey = "@-parrot*"

@@ -4,11 +4,11 @@ import (
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/cache"
-	"github.com/sereiner/lib/db"
-	"github.com/sereiner/lib/influxdb"
+	"github.com/sereiner/library/cache"
+	"github.com/sereiner/library/db"
+	"github.com/sereiner/library/influxdb"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/queue"
+	"github.com/sereiner/library/queue"
 )
 
 type IContainer interface {

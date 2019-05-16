@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/timer"
-	"github.com/sereiner/lib/concurrent/cmap"
+	"github.com/sereiner/library/concurrent/cmap"
 	logger "github.com/sereiner/log"
-	"github.com/sereiner/lib/metrics"
-	"github.com/sereiner/lib/net"
-	"github.com/sereiner/lib/xsync"
+	"github.com/sereiner/library/metrics"
+	"github.com/sereiner/library/net"
+	"github.com/sereiner/library/xsync"
 )
 
 type reporter struct {

@@ -8,7 +8,7 @@ import (
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/lib/types"
+	"github.com/sereiner/library/types"
 	"github.com/urfave/cli"
 )
 

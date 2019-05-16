@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/sereiner/lib/jsons"
+	"github.com/sereiner/library/jsons"
 )
 
 //writePump 向客户端写入响应消息
