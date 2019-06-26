@@ -160,6 +160,7 @@ func (r *Invoker) Request(service string, method string, header map[string]strin
 	}
 	return
 }
+
 func (r *Invoker) getBalancer(domain string) (int, string) {
 	if b, ok := r.balancers[domain]; ok {
 		return b.Mode, b.Param
