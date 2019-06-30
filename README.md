@@ -1,5 +1,6 @@
 # parrot
 
+![avatar](https://cdn.sinaimg.cn.52ecy.cn/large/005BYqpgly1g4eyqwpsj7j306106hq32.jpg)
 
 parrot 是一个快速开发 Go 应用的 微服务 框架，他可以用来快速开发 API、RPC、CRON、MQC、WS、Web 及后端服务等各种应用。
 
