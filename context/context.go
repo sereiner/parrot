@@ -1,17 +1,17 @@
 package context
 
 import (
+	"github.com/sereiner/gorose"
 	"strings"
 	"sync"
 
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/cache"
-	"github.com/sereiner/library/db"
 	"github.com/sereiner/library/influxdb"
-	logger "github.com/sereiner/log"
 	"github.com/sereiner/library/queue"
 	"github.com/sereiner/library/security/jwt"
+	logger "github.com/sereiner/log"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/registry"
 )
 
 type IContainer interface {
@@ -27,10 +27,10 @@ type IContainer interface {
 	GetCacheBy(tpName string, name string) (c cache.ICache, err error)
 	SaveCacheObject(tpName string, name string, f func(c conf.IConf) (cache.ICache, error)) (bool, cache.ICache, error)
 
-	GetRegularDB(names ...string) (d db.IDB)
-	GetDB(names ...string) (d db.IDB, err error)
-	GetDBBy(tpName string, name string) (c db.IDB, err error)
-	SaveDBObject(tpName string, name string, f func(c conf.IConf) (db.IDB, error)) (bool, db.IDB, error)
+	GetRegularDB(names ...string) (d gorose.IDB)
+	GetDB(names ...string) (d gorose.IDB, err error)
+	GetDBBy(tpName string, name string) (c gorose.IDB, err error)
+	SaveDBObject(tpName string, name string, f func(c conf.IConf) (gorose.IDB, error)) (bool, gorose.IDB, error)
 
 	GetRegularInflux(names ...string) (c influxdb.IInfluxClient)
 	GetInflux(names ...string) (d influxdb.IInfluxClient, err error)
