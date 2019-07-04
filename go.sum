@@ -103,9 +103,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/samuel/go-zookeeper v0.0.0-20180130194729-c4fab1ac1bec h1:6ncX5ko6B9LntYM0YBRXkiSaZMmLYeZ/NWcmeB43mMY=
 github.com/samuel/go-zookeeper v0.0.0-20180130194729-c4fab1ac1bec/go.mod h1:gi+0XIa01GRL2eRQVjQkKGqKF3SF9vZR/HnPullcV2E=
-github.com/sereiner/gorose v0.0.0-20190630095215-4104ea259d2d h1:kZ/lqEvouYzjWeVAI2f7wENYCmZ1hzMbktTNH8ZgHjo=
-github.com/sereiner/gorose v0.0.0-20190630095215-4104ea259d2d/go.mod h1:tgENKxYaX0xjcpSD5/iwmFdNA5p/MfALI8dvhtG//Dg=
-github.com/sereiner/lib v0.0.8 h1:s0LLwWs1q+HjidsXQJB4X4fQ2TwR5ZfQ3VmQp6KLSkU=
+github.com/sereiner/gorose v0.0.0-20190630101325-a9085c197a58 h1:9BsG+uC0QF7xdKpJb3wLv7muNTh4IaD2MxpYLOjWcEc=
+github.com/sereiner/gorose v0.0.0-20190630101325-a9085c197a58/go.mod h1:tgENKxYaX0xjcpSD5/iwmFdNA5p/MfALI8dvhtG//Dg=
 github.com/sereiner/lib v0.0.8/go.mod h1:1jLpYkCZafVFejVeglP6M5G6HFajWCvcTvJ9q9QUqPc=
 github.com/sereiner/lib v0.1.0 h1:UyNtkqWd2qfTEv3A61jBR0HpIemOGyRS06NnlWH9CRM=
 github.com/sereiner/lib v0.1.0/go.mod h1:UBrqq7WYEyxrvsbOeKNIGvg03vFhi6lBY7Lk/J4ym+w=
