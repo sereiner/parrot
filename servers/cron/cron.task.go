@@ -9,7 +9,7 @@ import (
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/zkfy/cron"
 )
 

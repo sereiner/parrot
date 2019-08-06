@@ -5,7 +5,7 @@ import (
 	"github.com/sereiner/library/cache"
 	"github.com/sereiner/library/influxdb"
 	"github.com/sereiner/library/queue"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/registry"

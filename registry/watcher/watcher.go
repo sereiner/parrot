@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/sereiner/parrot/registry"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 //ContentChangeArgs 值变化通知事件

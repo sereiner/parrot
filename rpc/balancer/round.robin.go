@@ -3,7 +3,7 @@ package balancer
 import (
 	"sync"
 
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 
 	"golang.org/x/net/context"
 

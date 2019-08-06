@@ -30,8 +30,7 @@ require (
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/pkg/profile v1.3.0
 	github.com/sereiner/gorose v0.0.0-20190630101325-a9085c197a58
-	github.com/sereiner/library v0.0.0-20190612135238-93de5053e8e8
-	github.com/sereiner/log v0.0.3
+	github.com/sereiner/library v0.0.0-20190806072843-b0850cd92307
 	github.com/stretchr/testify v1.3.0
 	github.com/ugorji/go v1.1.4
 	github.com/urfave/cli v1.20.0
@@ -41,7 +40,7 @@ require (
 	github.com/zkfy/go-oci8 v0.0.0-20180327092318-ad9f59dedff0
 	github.com/zkfy/log v0.0.0-20180312054228-b2704c3ef896
 	golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c
-	golang.org/x/sys v0.0.0-20190429190828-d89cdac9e872
+	golang.org/x/sys v0.0.0-20190726002231-94b544f455ef
 	google.golang.org/grpc v0.0.0-00010101000000-000000000000
 	gopkg.in/yaml.v2 v2.2.2
 )

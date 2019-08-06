@@ -10,7 +10,7 @@ import (
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/parrot/servers/pkg/timer"
 	"github.com/sereiner/library/concurrent/cmap"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/metrics"
 	"github.com/sereiner/library/net"
 )

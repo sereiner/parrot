@@ -7,7 +7,7 @@ import (
 	"github.com/sereiner/parrot/rpc/balancer"
 	"github.com/sereiner/parrot/servers/rpc/pb"
 	"github.com/sereiner/library/jsons"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/types"
 
 	"errors"

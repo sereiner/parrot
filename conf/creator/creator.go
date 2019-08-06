@@ -7,7 +7,7 @@ import (
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/engines"
 	"github.com/sereiner/parrot/registry"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 //Creator 配置文件创建器

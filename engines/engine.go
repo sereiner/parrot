@@ -13,7 +13,7 @@ import (
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/rpc"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 //IServiceEngine 服务引擎接口

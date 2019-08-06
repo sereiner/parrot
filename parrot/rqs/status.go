@@ -15,7 +15,7 @@ import (
 	"github.com/sereiner/library/sysinfo/cpu"
 	"github.com/sereiner/library/sysinfo/disk"
 	"github.com/sereiner/library/sysinfo/memory"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/servers/http"
 )
 

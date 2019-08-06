@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/sereiner/library/jsons"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/zkfy/log"
 )
 

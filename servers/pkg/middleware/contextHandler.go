@@ -14,7 +14,7 @@ import (
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/library/encoding/base64"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 func getUUID(c *dispatcher.Context) string {

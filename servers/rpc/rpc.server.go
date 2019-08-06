@@ -16,7 +16,7 @@ import (
 
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/middleware"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

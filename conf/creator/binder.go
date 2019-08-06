@@ -9,7 +9,7 @@ import (
 
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/registry"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 const (

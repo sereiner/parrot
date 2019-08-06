@@ -8,7 +8,7 @@ import (
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/engines"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 //WebResponsiveServer web 响应式服务器

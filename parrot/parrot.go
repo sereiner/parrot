@@ -16,7 +16,7 @@ import (
 
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/registry/watcher"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 //parrot  parrot app

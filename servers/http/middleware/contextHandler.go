@@ -13,7 +13,7 @@ import (
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/library/encoding"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 func getUUID(c *gin.Context) string {

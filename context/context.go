@@ -9,7 +9,7 @@ import (
 	"github.com/sereiner/library/influxdb"
 	"github.com/sereiner/library/queue"
 	"github.com/sereiner/library/security/jwt"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
 )

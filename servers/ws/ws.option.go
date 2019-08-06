@@ -3,7 +3,7 @@ package ws
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sereiner/parrot/servers/http/middleware"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 type Handler interface {

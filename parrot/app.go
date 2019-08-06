@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/asaskevich/govalidator"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/conf/creator"
 	"github.com/sereiner/parrot/parrot/daemon"

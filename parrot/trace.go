@@ -8,7 +8,7 @@ import (
 	"runtime/trace"
 
 	"github.com/pkg/profile"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 var supportTraces = []string{"cpu", "mem", "block", "mutex", "web"}

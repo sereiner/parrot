@@ -10,7 +10,7 @@ import (
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/registry/watcher"
 	"github.com/sereiner/parrot/rpc"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 type loggerSetting struct {

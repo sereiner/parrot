@@ -10,7 +10,7 @@ import (
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/engines"
 	"github.com/sereiner/parrot/servers"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 type IServer interface {

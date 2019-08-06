@@ -2,7 +2,7 @@ package cron
 
 import (
 	"github.com/sereiner/parrot/servers/pkg/middleware"
-	logger "github.com/sereiner/log"
+	logger "github.com/sereiner/library/log"
 )
 
 type option struct {
