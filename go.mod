@@ -29,7 +29,7 @@ require (
 	github.com/nwaples/rardecode v1.0.0 // indirect
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/pkg/profile v1.3.0
-	github.com/sereiner/gorose v0.0.0-20190630101325-a9085c197a58
+	github.com/sereiner/gorose v0.0.0-20190806143658-2b12588232c6
 	github.com/sereiner/library v0.0.0-20190806072843-b0850cd92307
 	github.com/stretchr/testify v1.3.0
 	github.com/ugorji/go v1.1.4
