@@ -2,9 +2,8 @@ package component
 
 import (
 	"fmt"
-
+	"github.com/sereiner/library/db"
 	"github.com/asaskevich/govalidator"
-	"github.com/sereiner/gorose"
 	"github.com/sereiner/library/concurrent/cmap"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
@@ -18,10 +17,10 @@ const DBNameInVar = "db"
 
 //IComponentDB Component DB
 type IComponentDB interface {
-	GetRegularDB(names ...string) (d gorose.IDB)
-	GetDB(names ...string) (d gorose.IDB, err error)
-	GetDBBy(tpName string, name string) (c gorose.IDB, err error)
-	SaveDBObject(tpName string, name string, f func(c conf.IConf) (gorose.IDB, error)) (bool, gorose.IDB, error)
+	GetRegularDB(names ...string) (d db.IDB)
+	GetDB(names ...string) (d db.IDB, err error)
+	GetDBBy(tpName string, name string) (c db.IDB, err error)
+	SaveDBObject(tpName string, name string, f func(c conf.IConf) (db.IDB, error)) (bool, db.IDB, error)
 	Close() error
 }
 
@@ -41,7 +40,7 @@ func NewStandardDB(c IContainer, name ...string) *StandardDB {
 }
 
 //GetRegularDB 获取正式的没有异常数据库实例
-func (s *StandardDB) GetRegularDB(names ...string) (d gorose.IDB) {
+func (s *StandardDB) GetRegularDB(names ...string) (d db.IDB) {
 	d, err := s.GetDB(names...)
 	if err != nil {
 		panic(err)
@@ -50,7 +49,7 @@ func (s *StandardDB) GetRegularDB(names ...string) (d gorose.IDB) {
 }
 
 //GetDB 获取数据库操作对象
-func (s *StandardDB) GetDB(names ...string) (d gorose.IDB, err error) {
+func (s *StandardDB) GetDB(names ...string) (d db.IDB, err error) {
 	name := s.name
 	if len(names) > 0 {
 		name = names[0]
@@ -59,8 +58,8 @@ func (s *StandardDB) GetDB(names ...string) (d gorose.IDB, err error) {
 }
 
 //GetDBBy 根据类型获取缓存数据
-func (s *StandardDB) GetDBBy(tpName string, name string) (c gorose.IDB, err error) {
-	_, c, err = s.SaveDBObject(tpName, name, func(jConf conf.IConf) (gorose.IDB, error) {
+func (s *StandardDB) GetDBBy(tpName string, name string) (c db.IDB, err error) {
+	_, c, err = s.SaveDBObject(tpName, name, func(jConf conf.IConf) (db.IDB, error) {
 		var dbConf conf.DBConf
 		if err = jConf.Unmarshal(&dbConf); err != nil {
 			return nil, err
@@ -68,25 +67,19 @@ func (s *StandardDB) GetDBBy(tpName string, name string) (c gorose.IDB, err erro
 		if b, err := govalidator.ValidateStruct(&dbConf); !b {
 			return nil, err
 		}
-		connection, err := gorose.Open(&gorose.DbConfigSingle{
-			Driver:          dbConf.Provider, // driver: mysql/sqlite/oracle/mssql/postgres
-			EnableQueryLog:  false,           // if enable sql logs
-			SetMaxOpenConns: dbConf.MaxOpen,  // connection pool of max Open connections, default zero
-			SetMaxIdleConns: dbConf.MaxIdle,  // connection pool of max sleep connections
-			Prefix:          "",              // prefix of table
-			Dsn:             dbConf.ConnString,
-		})
-		if err != nil {
-			fmt.Println(err)
-			return nil, err
-		}
-		return connection, err
+
+		return db.NewDB(
+			dbConf.Provider,
+			dbConf.ConnString,
+			dbConf.MaxOpen,
+			dbConf.MaxIdle,
+			dbConf.LefeTime)
 	})
 	return c, err
 }
 
 //SaveDBObject 缓存对象
-func (s *StandardDB) SaveDBObject(tpName string, name string, f func(c conf.IConf) (gorose.IDB, error)) (bool, gorose.IDB, error) {
+func (s *StandardDB) SaveDBObject(tpName string, name string, f func(c conf.IConf) (db.IDB, error)) (bool, db.IDB, error) {
 	cacheConf, err := s.IContainer.GetVarConf(tpName, name)
 	if err != nil {
 		return false, nil, fmt.Errorf("%s %v", registry.Join("/", s.GetPlatName(), "var", tpName, name), err)
@@ -99,13 +92,13 @@ func (s *StandardDB) SaveDBObject(tpName string, name string, f func(c conf.ICon
 		err = fmt.Errorf("创建db失败:%s,err:%v", string(cacheConf.GetRaw()), err)
 		return ok, nil, err
 	}
-	return ok, ch.(gorose.IDB), err
+	return ok, ch.(db.IDB), err
 }
 
 //Close 释放所有缓存配置
 func (s *StandardDB) Close() error {
 	s.dbMap.RemoveIterCb(func(k string, v interface{}) bool {
-		v.(gorose.IDB).Close()
+		v.(db.IDB).Close()
 		return true
 	})
 	return nil
