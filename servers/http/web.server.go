@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/gin-gonic/gin"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/http/middleware"
@@ -20,6 +21,7 @@ type WebServer struct {
 	*option
 	conf    *conf.MetadataConf
 	engine  *x.Server
+	gin     *gin.Engine
 	views   []string
 	running string
 	proto   string

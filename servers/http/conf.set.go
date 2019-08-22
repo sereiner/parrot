@@ -2,12 +2,19 @@ package http
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
 
 	"github.com/asaskevich/govalidator"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/http/middleware"
+	"github.com/sereiner/library/archiver"
 )
+
+//waitRemoveDir 等待移除的静态文件
+var waitRemoveDir = make([]string, 0, 1)
 
 type ISetMetric interface {
 	SetMetric(*conf.Metric) error
@@ -58,9 +65,13 @@ func SetStatic(set ISetStatic, cnf conf.IServerConf) (enable bool, err error) {
 	if static.FirstPage == "" {
 		static.FirstPage = "index.html"
 	}
-	static.Exts = append(static.Exts, ".txt", ".jpg", ".png", ".gif", ".ico", ".html", ".htm", ".js", ".css", ".map", ".ttf", ".woff", ".woff2")
+	static.Exts = append(static.Exts, ".txt", ".jpg", ".png", ".gif", ".ico", ".html", ".htm", ".js", ".css", ".map", ".ttf", ".woff", ".woff2", ".woff2")
 	static.Rewriters = append(static.Rewriters, "/", "index.htm", "default.html")
 	static.Exclude = append(static.Exclude, "/views/", ".exe", ".so")
+	static.Dir, err = unarchive(static.Dir, static.Archive) //处理归档文件
+	if err != nil {
+		return false, err
+	}
 	err = set.SetStatic(&static)
 	return !static.Disable && err == nil, err
 }
@@ -70,7 +81,7 @@ type ISetRouterHandler interface {
 	SetRouters([]*conf.Router) error
 }
 
-func getRouters(services []string) conf.Routers {
+func getRouters(services map[string][]string) conf.Routers {
 	routers := conf.Routers{}
 
 	if len(services) == 0 {
@@ -79,14 +90,15 @@ func getRouters(services []string) conf.Routers {
 		return routers
 	}
 	routers.Routers = make([]*conf.Router, 0, len(services))
-	for _, srvs := range services {
-		routers.Routers = append(routers.Routers,
-			&conf.Router{
-				Action:  []string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"},
-				Name:    srvs,
-				Service: srvs,
-				Engine:  "*",
-			})
+	for name, actions := range services {
+		router := &conf.Router{
+			Action:  actions, //[]string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"},
+			Name:    name,
+			Service: name,
+			Engine:  "*",
+		}
+		router.Action = append(router.Action, "OPTIONS")
+		routers.Routers = append(routers.Routers, router)
 	}
 	return routers
 }
@@ -100,6 +112,7 @@ func SetHttpRouters(engine servers.IRegistryEngine, set ISetRouterHandler, cnf c
 		// routers.Routers = append(routers.Routers, &conf.Router{Action: []string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}, Name: "/*name", Service: "/@name", Engine: "*"})
 
 		routers = getRouters(engine.GetServices())
+		// fmt.Println("routers:", engine.GetServices())
 	}
 	if err != nil && err != conf.ErrNoSetting {
 		err = fmt.Errorf("路由:%v", err)
@@ -268,4 +281,29 @@ func SetJWT(set ISetJwtAuth, cnf conf.IServerConf) (enable bool, err error) {
 	}
 	err = set.SetJWT(jwt)
 	return err == nil && !jwt.Disable, err
+}
+func unarchive(dir string, path string) (string, error) {
+	if path == "" {
+		return dir, nil
+	}
+	archive := archiver.MatchingFormat(path)
+	if archive == nil {
+		return "", fmt.Errorf("指定的文件不是归档文件:%s", path)
+	}
+	tmpDir, err := ioutil.TempDir("", "parrot")
+	if err != nil {
+		return "", fmt.Errorf("创建临时文件失败:%v", err)
+	}
+	reader, err := os.Open(path)
+	if err != nil {
+		return "", fmt.Errorf("无法打开文件:%s(%v)", path, err)
+	}
+	defer reader.Close()
+	err = archive.Read(reader, tmpDir)
+	if err != nil {
+		return "", fmt.Errorf("读取归档文件失败:%v", err)
+	}
+	ndir := filepath.Join(tmpDir, dir)
+	waitRemoveDir = append(waitRemoveDir, tmpDir)
+	return ndir, nil
 }

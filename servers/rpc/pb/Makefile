@@ -1,5 +1,4 @@
-
 protoc:
-	protoc --proto_path=$(GOPATH)/src:. --go_out=plugins=grpc:. rpc.proto
+	protoc -I. --go_out=plugins=grpc:. *.proto
 	#protoc ok
 

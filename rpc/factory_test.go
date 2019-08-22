@@ -1,27 +1,82 @@
 package rpc
 
 import "testing"
+import "github.com/sereiner/library/ut"
 
 func TestFactoryResolvePath(t *testing.T) {
-	def_domain := "NotOnlyBooks_debug"
-	def_server := "search_server"
-	f := NewInvoker(def_domain, def_server, "zk://127.0.0.1")
+	def_domain := "parrot"
+	def_server := "sys.api"
+	f := NewRPCInvoker(def_domain, def_server, "")
+	svs, domain, server, err := f.resolvePath("order.request")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, def_server)
 
-	_, d, _, err := f.Request(
-		"/search",
-		"POST",
-		map[string]string{},
-		map[string]interface{}{
-			"key_word":  []string{"鲁迅"},
-			"uid":      "123456",
-			"page":      1,
-			"page_size": 10,
-		},
-		true)
+	svs, domain, server, err = f.resolvePath("/order/request")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, def_server)
 
-	if err != nil {
-		t.Log(err)
-	}
+	svs, domain, server, err = f.resolvePath("/order/request#")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, def_server)
 
-	t.Log(d)
+	svs, domain, server, err = f.resolvePath("#")
+	ut.Refute(t, err, nil)
+
+	svs, domain, server, err = f.resolvePath("#merchant_cron")
+	ut.Refute(t, err, nil)
+
+	svs, domain, server, err = f.resolvePath("/order/request#merchant")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, "merchant")
+
+	svs, domain, server, err = f.resolvePath("order.request#merchant.")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, "merchant")
+
+	svs, domain, server, err = f.resolvePath("order.request#merchant.sys")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, "sys")
+	ut.Expect(t, server, "merchant")
+
+	svs, domain, server, err = f.resolvePath("order.request#.sys")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, "sys")
+	ut.Expect(t, server, def_server)
+
+	svs, domain, server, err = f.resolvePath("order/request#merchant.")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, "merchant")
+
+	svs, domain, server, err = f.resolvePath("order/request#merchant.sys")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, "sys")
+	ut.Expect(t, server, "merchant")
+
+	svs, domain, server, err = f.resolvePath("order/request#.sys")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request")
+	ut.Expect(t, domain, "sys")
+	ut.Expect(t, server, def_server)
+
+	svs, domain, server, err = f.resolvePath("/order/request/create#merchant_rpc")
+	ut.Expect(t, err, nil)
+	ut.Expect(t, svs, "/order/request/create")
+	ut.Expect(t, domain, def_domain)
+	ut.Expect(t, server, "merchant_rpc")
+
 }

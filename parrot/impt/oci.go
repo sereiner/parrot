@@ -21,5 +21,8 @@ import (
 	_ "github.com/sereiner/library/queue"
 	_ "github.com/sereiner/library/queue/redis"
 	_ "github.com/sereiner/library/queue/xmq"
+
+	_ "github.com/sereiner/library/queue/mqtt"
+
 	_ "github.com/zkfy/go-oci8"
 )

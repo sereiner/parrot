@@ -1,7 +1,6 @@
 package mqc
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
@@ -40,7 +39,7 @@ type IQueues interface {
 }
 
 //SetQueues 设置queue
-func SetQueues(checkQueue bool, engine servers.IRegistryEngine, set IQueues, cnf conf.IServerConf, ext map[string]interface{}) (enable bool, err error) {
+func SetQueues(engine servers.IRegistryEngine, set IQueues, cnf conf.IServerConf, ext map[string]interface{}) (enable bool, err error) {
 
 	serverConf, err := cnf.GetSubConf("server")
 	if err == conf.ErrNoSetting {
@@ -50,26 +49,21 @@ func SetQueues(checkQueue bool, engine servers.IRegistryEngine, set IQueues, cnf
 	if err != nil {
 		return false, err
 	}
-	var server conf.Server
+	var server conf.QueueConf
 	if err = serverConf.Unmarshal(&server); err != nil {
 		return false, err
 	}
-	if b, err := govalidator.ValidateStruct(&server); !b {
-		err = fmt.Errorf("server配置有误:%v", err)
+	// if b, err := govalidator.ValidateStruct(&server); !b {
+	// 	err = fmt.Errorf("server配置有误:%v", err)
+	// 	return false, err
+	// }
+	var queues conf.Queues
+
+	if _, err = cnf.GetSubObject("queue", &queues); err != nil && err != conf.ErrNoSetting {
+		err = fmt.Errorf("queue:%v", err)
 		return false, err
 	}
-	var queues conf.Queues
-	if checkQueue {
-		if _, err = cnf.GetSubObject("queue", &queues); err == conf.ErrNoSetting {
-			err = fmt.Errorf("queue:%v", err)
-			return false, err
-		}
-		if err != nil {
-			return false, err
-		}
-		if len(queues.Queues) == 0 {
-			return false, errors.New("queue:未配置")
-		}
+	if len(queues.Queues) > 0 {
 		if b, err := govalidator.ValidateStruct(&queues); !b {
 			err = fmt.Errorf("queue配置有误:%v", err)
 			return false, err
@@ -95,8 +89,8 @@ func SetQueues(checkQueue bool, engine servers.IRegistryEngine, set IQueues, cnf
 		queue.Handler = middleware.ContextHandler(engine, queue.Name, queue.Engine, queue.Service, queue.Setting, ext)
 		nqueues = append(nqueues, queue)
 	}
-	if err = set.SetQueues(server.Proto, string(serverConf.GetRaw()), nqueues); err != nil {
+	if err = set.SetQueues(server.GetProto(), string(serverConf.GetRaw()), nqueues); err != nil {
 		return false, err
 	}
-	return len(nqueues) > 0 || !checkQueue, nil
+	return true, nil
 }

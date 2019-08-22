@@ -100,6 +100,7 @@ func (r *ServiceEngine) SetHandler(h component.IComponentHandler) error {
 
 	//初始化服务注册
 	svs := h.GetServices()
+
 	for group, handlers := range svs {
 		for name, handler := range handlers {
 			r.StandardComponent.AddCustomerService(name, handler, group, h.GetTags(name)...)
@@ -116,9 +117,9 @@ func (r *ServiceEngine) UpdateVarConf(conf conf.IServerConf) {
 }
 
 //GetServices 获取组件提供的所有服务
-func (r *ServiceEngine) GetServices() []string {
-	srvs := r.GetGroupServices(component.GetGroupName(r.GetServerType())...)
-	return srvs
+func (r *ServiceEngine) GetServices() map[string][]string {
+	return r.GetRegistryNames(component.GetGroupName(r.GetServerType())...)
+
 }
 
 //Execute 执行外部请求
@@ -196,7 +197,9 @@ func (r *ServiceEngine) Close() error {
 		}
 	}
 	r.StandardComponent.Close()
-	r.Invoker.Close()
+	if r.Invoker != nil {
+		r.Invoker.Close()
+	}
 	r.IComponentGlobalVarObject.Close()
 	r.IComponentCache.Close()
 	r.IComponentInfluxDB.Close()

@@ -19,6 +19,7 @@ import (
 	_ "github.com/sereiner/library/mq/stomp"
 	_ "github.com/sereiner/library/mq/xmq"
 	_ "github.com/sereiner/library/queue"
+	_ "github.com/sereiner/library/queue/mqtt"
 	_ "github.com/sereiner/library/queue/redis"
 	_ "github.com/sereiner/library/queue/xmq"
 )

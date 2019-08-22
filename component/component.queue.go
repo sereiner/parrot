@@ -3,7 +3,6 @@ package component
 import (
 	"fmt"
 
-	"github.com/asaskevich/govalidator"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/concurrent/cmap"
@@ -65,10 +64,10 @@ func (s *StandardQueue) GetQueueBy(tpName string, name string) (c queue.IQueue, 
 		if err = jConf.Unmarshal(&qConf); err != nil {
 			return nil, err
 		}
-		if b, err := govalidator.ValidateStruct(&qConf); !b {
-			return nil, err
-		}
-		return queue.NewQueue(qConf.Proto, string(jConf.GetRaw()))
+		// if b, err := govalidator.ValidateStruct(&qConf); !b {
+		// 	return nil, err
+		// }
+		return queue.NewQueue(qConf.GetProto(), string(jConf.GetRaw()))
 	})
 	return c, err
 }
@@ -79,7 +78,7 @@ func (s *StandardQueue) SaveQueueObject(tpName string, name string, f func(c con
 	if err != nil {
 		return false, nil, fmt.Errorf("%s %v", registry.Join("/", s.GetPlatName(), "var", tpName, name), err)
 	}
-	key := fmt.Sprintf("%s/%s:%d", tpName, name, cacheConf.GetVersion())
+	key := fmt.Sprintf("%s/%s:%s", tpName, name, cacheConf.GetSignature())
 	ok, ch, err := s.queueCache.SetIfAbsentCb(key, func(input ...interface{}) (c interface{}, err error) {
 		return f(cacheConf)
 	})

@@ -2,6 +2,7 @@ package http
 
 import (
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -138,6 +139,9 @@ func (w *ApiResponsiveServer) Shutdown() {
 	if w.engine != nil {
 		w.engine.Close()
 	}
+	for _, path := range waitRemoveDir {
+		os.RemoveAll(path)
+	}
 }
 
 //GetAddress 获取服务器地址
@@ -151,7 +155,7 @@ func (w *ApiResponsiveServer) GetStatus() string {
 }
 
 //GetServices 获取服务列表
-func (w *ApiResponsiveServer) GetServices() []string {
+func (w *ApiResponsiveServer) GetServices() map[string][]string {
 	return w.engine.GetServices()
 }
 

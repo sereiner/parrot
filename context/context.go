@@ -1,17 +1,19 @@
 package context
 
 import (
-	"github.com/sereiner/library/db"
 	"strings"
 	"sync"
 
-	"github.com/sereiner/library/cache"
-	"github.com/sereiner/library/influxdb"
-	logger "github.com/sereiner/library/log"
-	"github.com/sereiner/library/queue"
-	"github.com/sereiner/library/security/jwt"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
+	"github.com/sereiner/library/cache"
+	"github.com/sereiner/library/db"
+	"github.com/sereiner/library/influxdb"
+	 logger "github.com/sereiner/library/log"
+	"github.com/sereiner/library/net"
+	"github.com/sereiner/library/queue"
+	"github.com/sereiner/library/security/jwt"
+	"github.com/sereiner/library/security/md5"
 )
 
 type IContainer interface {
@@ -119,4 +121,12 @@ func (c *Context) Close() {
 func formatName(name string) string {
 	text := "/" + strings.Trim(strings.Trim(name, " "), "/")
 	return strings.ToLower(text)
+}
+
+//MakeSign 检查签名原串
+func MakeSign(input map[string]interface{}, key string) string {
+	values := net.NewValues()
+	values.SetMap(input)
+	values.Sort()
+	return md5.Encrypt(values.Join("", "") + key)
 }

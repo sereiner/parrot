@@ -10,31 +10,31 @@ import (
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/servers"
 
+	"github.com/sereiner/parrot/servers/http"
 	"github.com/sereiner/library/jsons"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/net"
 	"github.com/sereiner/library/sysinfo/cpu"
 	"github.com/sereiner/library/sysinfo/disk"
 	"github.com/sereiner/library/sysinfo/memory"
-	logger "github.com/sereiner/library/log"
-	"github.com/sereiner/parrot/servers/http"
 )
 
 var statusLocalPort = []int{10160, 10162, 10166, 10168}
 
 //RemoteQueryService 远程查询服务
 type RemoteQueryService struct {
-	server         *http.ApiServer
-	platName       string
-	systemName     string
-	serverTypes    []string
-	clusterName    string
-	closeChan      chan struct{}
-	registry       registry.IRegistry
-	logger         *logger.Logger
-	version        string
-	pubs           []string
+	server        *http.ApiServer
+	platName      string
+	systemName    string
+	serverTypes   []string
+	clusterName   string
+	closeChan     chan struct{}
+	registry      registry.IRegistry
+	logger        *logger.Logger
+	version       string
+	pubs          []string
 	ParrotShutdown func()
-	done           bool
+	done          bool
 }
 
 //NewHRemoteQueryService 创建HRemoteQueryService

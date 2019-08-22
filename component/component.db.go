@@ -2,11 +2,12 @@ package component
 
 import (
 	"fmt"
-	"github.com/sereiner/library/db"
+
 	"github.com/asaskevich/govalidator"
-	"github.com/sereiner/library/concurrent/cmap"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
+	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/library/db"
 )
 
 //DBTypeNameInVar DB在var配置中的类型名称
@@ -67,13 +68,11 @@ func (s *StandardDB) GetDBBy(tpName string, name string) (c db.IDB, err error) {
 		if b, err := govalidator.ValidateStruct(&dbConf); !b {
 			return nil, err
 		}
-
-		return db.NewDB(
-			dbConf.Provider,
+		return db.NewDB(dbConf.Provider,
 			dbConf.ConnString,
 			dbConf.MaxOpen,
 			dbConf.MaxIdle,
-			dbConf.LefeTime)
+			dbConf.LifeTime)
 	})
 	return c, err
 }
@@ -84,7 +83,7 @@ func (s *StandardDB) SaveDBObject(tpName string, name string, f func(c conf.ICon
 	if err != nil {
 		return false, nil, fmt.Errorf("%s %v", registry.Join("/", s.GetPlatName(), "var", tpName, name), err)
 	}
-	key := fmt.Sprintf("%s/%s:%d", tpName, name, cacheConf.GetVersion())
+	key := fmt.Sprintf("%s/%s:%s", tpName, name, cacheConf.GetSignature())
 	ok, ch, err := s.dbMap.SetIfAbsentCb(key, func(input ...interface{}) (c interface{}, err error) {
 		return f(cacheConf)
 	})
@@ -98,7 +97,7 @@ func (s *StandardDB) SaveDBObject(tpName string, name string, f func(c conf.ICon
 //Close 释放所有缓存配置
 func (s *StandardDB) Close() error {
 	s.dbMap.RemoveIterCb(func(k string, v interface{}) bool {
-		v.(db.IDB).Close()
+		v.(*db.DB).Close()
 		return true
 	})
 	return nil

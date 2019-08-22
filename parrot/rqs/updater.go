@@ -1,7 +1,6 @@
 package rqs
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,13 +12,13 @@ import (
 	"time"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/mholt/archiver"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/registry"
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/osext"
 	"github.com/sereiner/library/security/crc32"
-	"github.com/zkfy/archiver"
 )
 
 type updater struct {
@@ -67,12 +66,7 @@ func (u *updater) Apply(update io.Reader, opts updaterOptions) (err error) {
 	defer os.RemoveAll(u.newDir)
 
 	//读取归档并解压文件
-	archiver := archiver.MatchingFormat(opts.TargetName)
-	if archiver == nil {
-		err = fmt.Errorf("文件不是有效的归档或压缩文件")
-		return
-	}
-	err = archiver.Read(bytes.NewReader(newBytes), u.newDir)
+	err = archiver.Unarchive(opts.TargetName, u.newDir)
 	if err != nil {
 		err = fmt.Errorf("读取归档文件失败:%v", err)
 		return

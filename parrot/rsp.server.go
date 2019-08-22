@@ -3,7 +3,7 @@ package parrot
 import (
 	"sync"
 	"time"
- "strings"
+ 	"strings"
 	"github.com/sereiner/parrot/component"
 
 	"github.com/sereiner/parrot/servers"
