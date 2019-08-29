@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/library/security/jwt"
 	"github.com/sereiner/library/types"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/context"
 )
 
 //JwtAuth jwt

@@ -3,10 +3,10 @@ package component
 import (
 	"fmt"
 
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/cache"
 	"github.com/sereiner/library/concurrent/cmap"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/registry"
 )
 
 //CacheTypeNameInVar 缓存在var配置中的类型名称

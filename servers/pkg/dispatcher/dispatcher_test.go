@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/sereiner/parrot/servers/rpc/standard/pb"
 	"github.com/sereiner/library/ut"
+	"github.com/sereiner/parrot/servers/rpc/standard/pb"
 )
 
 func TestEngine(t *testing.T) {

@@ -13,12 +13,12 @@ import (
 
 	"github.com/asaskevich/govalidator"
 	"github.com/mholt/archiver"
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/context"
-	"github.com/sereiner/parrot/registry"
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/osext"
 	"github.com/sereiner/library/security/crc32"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/context"
+	"github.com/sereiner/parrot/registry"
 )
 
 type updater struct {

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sereiner/parrot/rpc/balancer"
-	"github.com/sereiner/parrot/servers/rpc/pb"
 	"github.com/sereiner/library/jsons"
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/types"
+	"github.com/sereiner/parrot/rpc/balancer"
+	"github.com/sereiner/parrot/servers/rpc/pb"
 
 	"errors"
 

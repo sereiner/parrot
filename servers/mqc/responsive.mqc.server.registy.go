@@ -3,9 +3,9 @@ package mqc
 import (
 	"time"
 
+	"github.com/sereiner/library/types"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/pkg/sharding"
-	"github.com/sereiner/library/types"
 )
 
 func (s *MqcResponsiveServer) watchMasterChange(root, path string) error {

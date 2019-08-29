@@ -1,8 +1,8 @@
 package mqc
 
 import (
-	"github.com/sereiner/parrot/servers/pkg/middleware"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/parrot/servers/pkg/middleware"
 )
 
 type option struct {

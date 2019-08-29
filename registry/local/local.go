@@ -14,8 +14,8 @@ import (
 	"sync/atomic"
 
 	"github.com/fsnotify/fsnotify"
-	r "github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/registry"
+	r "github.com/sereiner/parrot/registry"
 )
 
 var _ r.IRegistry = &local{}

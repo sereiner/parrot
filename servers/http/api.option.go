@@ -2,8 +2,8 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sereiner/parrot/servers/http/middleware"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/parrot/servers/http/middleware"
 )
 
 type Handler interface {

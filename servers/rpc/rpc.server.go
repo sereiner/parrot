@@ -10,13 +10,13 @@ import (
 	"time"
 
 	"github.com/asaskevich/govalidator"
+	xnet "github.com/sereiner/library/net"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/rpc/pb"
-	xnet "github.com/sereiner/library/net"
 
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/middleware"
-	logger "github.com/sereiner/library/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sereiner/parrot/conf"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/parrot/conf"
 )
 
 //Logging 记录日志

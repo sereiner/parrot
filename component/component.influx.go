@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/concurrent/cmap"
 	"github.com/sereiner/library/influxdb"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/registry"
 )
 
 //InfluxDBTypeNameInVar influxdb在var配置中的类型名称

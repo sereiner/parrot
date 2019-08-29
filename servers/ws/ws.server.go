@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/asaskevich/govalidator"
+	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/library/net"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/http/middleware"
-	logger "github.com/sereiner/library/log"
-	"github.com/sereiner/library/net"
 )
 
 //WSServer WSServer服务器

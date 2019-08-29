@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sereiner/parrot/rpc/balancer"
 	"github.com/sereiner/library/concurrent/cmap"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/parrot/rpc/balancer"
 )
 
 //Invoker RPC服务调用器，封装基于域及负载算法的RPC客户端

@@ -1,9 +1,9 @@
 package cron
 
 import (
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers"
-	logger "github.com/sereiner/library/log"
 )
 
 type rpcServerAdapter struct {

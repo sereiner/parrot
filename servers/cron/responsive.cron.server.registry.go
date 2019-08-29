@@ -3,9 +3,9 @@ package cron
 import (
 	"time"
 
+	"github.com/sereiner/library/types"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/pkg/sharding"
-	"github.com/sereiner/library/types"
 )
 
 func (s *CronResponsiveServer) watchMasterChange(root, path string) error {
@@ -55,7 +55,7 @@ func (s *CronResponsiveServer) watchMasterChange(root, path string) error {
 	return nil
 }
 
-func (s *CronResponsiveServer) isMaster(path string, cldrs []string)(isMaster bool) {
+func (s *CronResponsiveServer) isMaster(path string, cldrs []string) (isMaster bool) {
 	s.shardingIndex, isMaster = sharding.IsMaster(s.master, s.shardingCount, path, cldrs)
 	return isMaster
 

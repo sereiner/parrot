@@ -4,16 +4,16 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/cache"
 	"github.com/sereiner/library/db"
 	"github.com/sereiner/library/influxdb"
-	 logger "github.com/sereiner/library/log"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/net"
 	"github.com/sereiner/library/queue"
 	"github.com/sereiner/library/security/jwt"
 	"github.com/sereiner/library/security/md5"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/registry"
 )
 
 type IContainer interface {

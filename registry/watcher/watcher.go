@@ -5,8 +5,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/sereiner/parrot/registry"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/parrot/registry"
 )
 
 //ContentChangeArgs 值变化通知事件

@@ -3,9 +3,9 @@ package rpc
 import (
 	"golang.org/x/net/context"
 
+	"github.com/sereiner/library/jsons"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/parrot/servers/rpc/pb"
-	"github.com/sereiner/library/jsons"
 )
 
 type Processor struct {

@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -9,11 +10,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	"github.com/sereiner/library/encoding"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/servers"
-	"github.com/sereiner/library/encoding"
-	 logger "github.com/sereiner/library/log"
 )
 
 func getUUID(c *gin.Context) string {
@@ -222,8 +223,8 @@ func makeExtData(c *gin.Context) map[string]interface{} {
 		if err != nil {
 			return "", err
 		}
+		c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(buff))
 		return string(nbuff), nil
-
 	}
 	return input
 }

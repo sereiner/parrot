@@ -6,13 +6,13 @@ import (
 
 	"github.com/sereiner/library/xsync"
 
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/servers/pkg/dispatcher"
-	"github.com/sereiner/parrot/servers/pkg/timer"
 	"github.com/sereiner/library/concurrent/cmap"
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/metrics"
 	"github.com/sereiner/library/net"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/servers/pkg/dispatcher"
+	"github.com/sereiner/parrot/servers/pkg/timer"
 )
 
 type reporter struct {

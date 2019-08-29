@@ -3,10 +3,10 @@ package servers
 import (
 	"fmt"
 
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
-	logger "github.com/sereiner/library/log"
 )
 
 var IsDebug = false

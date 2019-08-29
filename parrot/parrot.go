@@ -14,9 +14,9 @@ import (
 	"github.com/sereiner/parrot/parrot/rpclog"
 	"github.com/sereiner/parrot/servers"
 
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/registry/watcher"
-	logger "github.com/sereiner/library/log"
 )
 
 //parrot  parrot app

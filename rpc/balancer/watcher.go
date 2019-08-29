@@ -3,8 +3,8 @@ package balancer
 import (
 	"strings"
 
-	"github.com/sereiner/parrot/registry"
 	r "github.com/sereiner/library/registry"
+	"github.com/sereiner/parrot/registry"
 
 	"sort"
 

@@ -1,9 +1,9 @@
 package rpc
 
 import (
-	"github.com/sereiner/parrot/servers/rpc/pb"
 	"github.com/sereiner/library/jsons"
 	"github.com/sereiner/library/types"
+	"github.com/sereiner/parrot/servers/rpc/pb"
 )
 
 type Request struct {

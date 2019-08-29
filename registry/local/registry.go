@@ -1,8 +1,8 @@
 package local
 
 import (
-	"github.com/sereiner/parrot/registry"
 	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/parrot/registry"
 )
 
 //zkRegistry 基于zookeeper的注册中心

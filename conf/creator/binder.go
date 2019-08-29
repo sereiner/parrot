@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/registry"
-	logger "github.com/sereiner/library/log"
 )
 
 const (

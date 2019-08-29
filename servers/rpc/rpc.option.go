@@ -1,9 +1,9 @@
 package rpc
 
 import (
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/parrot/servers/pkg/middleware"
-	logger "github.com/sereiner/library/log"
 )
 
 type Handler interface {

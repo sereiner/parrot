@@ -5,13 +5,13 @@ import (
 	"os"
 
 	"github.com/asaskevich/govalidator"
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/conf/creator"
 	"github.com/sereiner/parrot/parrot/daemon"
 	_ "github.com/sereiner/parrot/parrot/impt"
 	"github.com/sereiner/parrot/parrot/rqs"
 	"github.com/sereiner/parrot/registry"
-	logger "github.com/sereiner/library/log"
 	"github.com/urfave/cli"
 	"github.com/wule61/log"
 )
@@ -22,7 +22,7 @@ type MicroApp struct {
 	logger  *logger.Logger
 	xlogger logger.ILogging
 	//Conf 绑定安装程序
-	Conf  *creator.Binder
+	Conf   *creator.Binder
 	parrot *parrot
 	*option
 	remoteQueryService *rqs.RemoteQueryService

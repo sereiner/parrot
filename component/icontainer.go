@@ -1,14 +1,14 @@
 package component
 
 import (
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/context"
-	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/cache"
 	"github.com/sereiner/library/db"
 	"github.com/sereiner/library/influxdb"
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/library/queue"
+	"github.com/sereiner/parrot/conf"
+	"github.com/sereiner/parrot/context"
+	"github.com/sereiner/parrot/registry"
 )
 
 type IContainer interface {

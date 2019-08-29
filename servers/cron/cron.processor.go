@@ -5,10 +5,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 	"github.com/sereiner/library/concurrent/cmap"
 	"github.com/sereiner/library/redis"
 	"github.com/sereiner/library/utility"
+	"github.com/sereiner/parrot/servers/pkg/dispatcher"
 )
 
 //Processor 任务处理程序

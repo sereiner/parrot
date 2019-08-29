@@ -7,10 +7,10 @@ import (
 	"path/filepath"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/sereiner/library/archiver"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/http/middleware"
-	"github.com/sereiner/library/archiver"
 )
 
 //waitRemoveDir 等待移除的静态文件

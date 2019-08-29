@@ -3,10 +3,10 @@ package parrot
 import (
 	"errors"
 
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/parrot/servers"
-	logger "github.com/sereiner/library/log"
 
 	"time"
 )

@@ -5,11 +5,11 @@ import (
 	"strings"
 	"time"
 
+	logger "github.com/sereiner/library/log"
+	"github.com/sereiner/library/net"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers"
 	"github.com/sereiner/parrot/servers/pkg/middleware"
-	logger "github.com/sereiner/library/log"
-	"github.com/sereiner/library/net"
 )
 
 //MqcServer mqc服务器

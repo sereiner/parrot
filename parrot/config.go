@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/sereiner/library/types"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/registry"
-	"github.com/sereiner/library/types"
 	"github.com/urfave/cli"
 )
 

@@ -4,9 +4,9 @@ import (
 	"strings"
 	"time"
 
+	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/servers/pkg/dispatcher"
-	logger "github.com/sereiner/library/log"
 )
 
 //Logging 记录日志

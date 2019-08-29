@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sereiner/parrot/registry"
 	"github.com/sereiner/library/ut"
+	"github.com/sereiner/parrot/registry"
 )
 
 type testfileChecker struct {
