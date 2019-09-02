@@ -37,6 +37,7 @@ type ServiceEngine struct {
 	registry registry.IRegistry
 	component.IComponentCache
 	component.IComponentDB
+	component.IComponentRPC
 	component.IComponentInfluxDB
 	component.IComponentQueue
 	component.IComponentGlobalVarObject
@@ -48,6 +49,7 @@ func NewServiceEngine(conf conf.IServerConf, registryAddr string, log logger.ILo
 	e.StandardComponent = component.NewStandardComponent("sys.engine", e)
 	e.IComponentCache = component.NewStandardCache(e, "cache")
 	e.IComponentDB = component.NewStandardDB(e, "db")
+	e.IComponentRPC = component.NewCustomRPC(e, "rpc")
 	e.IComponentInfluxDB = component.NewStandardInfluxDB(e, "influx")
 	e.IComponentQueue = component.NewStandardQueue(e, "queue")
 	e.IComponentGlobalVarObject = component.NewGlobalVarObjectCache(e)

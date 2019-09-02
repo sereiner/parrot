@@ -9,6 +9,7 @@ import (
 	"github.com/sereiner/parrot/conf"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/registry"
+	"google.golang.org/grpc"
 )
 
 type IContainer interface {
@@ -43,4 +44,8 @@ type IContainer interface {
 	GetGlobalObject(tpName string, name string) (c interface{}, err error)
 	SaveGlobalObject(tpName string, name string, f func(c conf.IConf) (interface{}, error)) (bool, interface{}, error)
 	Close() error
+
+	GetConn(service string) (*grpc.ClientConn, error)
+	SetRpcClient(name string, r interface{})
+	GetRpcClient(name string) (value interface{}, ok bool)
 }
