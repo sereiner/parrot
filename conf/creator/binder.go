@@ -54,6 +54,7 @@ type Binder struct {
 	WEB     IWebBinder
 	MQC     IMQCBinder
 	CRON    ICronBinder
+	ONCE    IOnceBinder
 	Plat    IPlatBinder
 	Log     logger.ILogging
 	binders map[string]imainBinder
@@ -71,6 +72,7 @@ func NewBinder(log logger.ILogging) *Binder {
 	s.WEB = NewWebBinder(s.params, s.input)
 	s.MQC = NewMQCBinder(s.params, s.input)
 	s.CRON = newCronBinder(s.params, s.input)
+	s.ONCE = newOnceBinder(s.params, s.input)
 	s.Plat = NewPlatBinder(s.params, s.input)
 	s.binders = map[string]imainBinder{
 		"api":  s.API,
@@ -79,6 +81,7 @@ func NewBinder(log logger.ILogging) *Binder {
 		"mqc":  s.MQC,
 		"cron": s.CRON,
 		"ws":   s.WS,
+		"once": s.ONCE,
 	}
 	return s
 }

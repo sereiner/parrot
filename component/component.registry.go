@@ -50,6 +50,9 @@ type IServiceRegistry interface {
 	//RPC 添加微服务
 	RPC(name string, h interface{}, tags ...string)
 
+	//Once 添加只执行一次的服务
+	Once(name string, h interface{}, tags ...string)
+
 	//Flow 添加自动流程(mqc,cron)
 	Flow(name string, h interface{}, tags ...string)
 
@@ -227,6 +230,10 @@ func (s *ServiceRegistry) RPC(name string, h interface{}, tags ...string) {
 func (s *ServiceRegistry) Micro(name string, h interface{}, tags ...string) {
 	s.API(name, h, tags...)
 	s.RPC(name, h, tags...)
+}
+
+func (s *ServiceRegistry) Once(name string, h interface{}, tags ...string) {
+	s.Customer(OnceService, name, h, tags...)
 }
 
 //MQC MQC流程服务

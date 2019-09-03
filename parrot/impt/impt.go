@@ -22,4 +22,5 @@ import (
 	_ "github.com/sereiner/parrot/servers/mqc"
 	_ "github.com/sereiner/parrot/servers/rpc"
 	_ "github.com/sereiner/parrot/servers/ws"
+	_ "github.com/sereiner/parrot/servers/once"
 )

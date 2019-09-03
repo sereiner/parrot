@@ -19,6 +19,8 @@ const (
 	//RPCService rpc 服务
 	RPCService = "__rpc_"
 
+	OnceService = "__once_"
+
 	//WSService websocket流程服务
 	WSService = "__websocket_"
 

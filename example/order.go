@@ -25,15 +25,11 @@ func NewQueryHandler(container component.IContainer) (u *QueryHandler) {
 func (u *QueryHandler) Handle(ctx *context.Context) (r interface{}) {
 	// 从请求中获取参数
 
-	if err := ctx.Request.Check("order_no"); err != nil {
-		return err
-	}
-
 	v, ok := u.container.GetRpcClient("hello_service")
 	if !ok {
 		return fmt.Errorf("grpc 客户端错误")
 	}
-	res, err := v.(pb.GreeterClient).SayHello(ct.Background(), &pb.HelloRequest{Name: "world " + ctx.Request.GetString("order_no")})
+	res, err := v.(pb.GreeterClient).SayHello(ct.Background(), &pb.HelloRequest{Name: "world haha" })
 	if err != nil {
 		return err
 	}

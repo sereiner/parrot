@@ -9,7 +9,7 @@ var (
 	microServerType   = []string{"api", "rpc", "web"}
 	flowServerType    = []string{"cron", "mqc"}
 	wsServerType      = []string{"ws"}
-	supportServerType = []string{"api", "rpc", "ws", "web", "cron", "mqc", "micro", "flow"}
+	supportServerType = []string{"api", "rpc", "ws", "web", "cron", "mqc", "micro", "flow", "once"}
 )
 
 type option struct {

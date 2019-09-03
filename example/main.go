@@ -11,13 +11,15 @@ func main() {
 	app := parrot.NewApp(
 		parrot.WithPlatName("apiserver"),
 		parrot.WithSystemName("apiserver"),
-		parrot.WithServerTypes("api"),
+		parrot.WithServerTypes("once"),
 		parrot.WithDebug())
 
 	app.Conf.Plat.SetVarConf("rpc", "rpc", `
 		{
 			"register":"http://localhost:2379"
 	}`)
+
+	app.Conf.ONCE.SetSubConf("task", `{"tasks":[{"cron":"@after 5s","service":"/order/query"}]}`)
 
 	app.Initializing(func(c component.IContainer) error {
 
@@ -30,6 +32,7 @@ func main() {
 
 		return nil
 	})
-	app.Micro("/order/query", NewQueryHandler)
+
+	app.Once("/order/query", NewQueryHandler)
 	app.Start()
 }
