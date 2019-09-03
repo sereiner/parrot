@@ -33,7 +33,7 @@ func (u *QueryHandler) Handle(ctx *context.Context) (r interface{}) {
 	if !ok {
 		return fmt.Errorf("grpc 客户端错误")
 	}
-	res,err := v.(pb.GreeterClient).SayHello(ct.Background(), &pb.HelloRequest{Name: "world " + ctx.Request.GetString("order_no")})
+	res, err := v.(pb.GreeterClient).SayHello(ct.Background(), &pb.HelloRequest{Name: "world " + ctx.Request.GetString("order_no")})
 	if err != nil {
 		return err
 	}
