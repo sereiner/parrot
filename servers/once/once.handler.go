@@ -7,7 +7,7 @@ import (
 	"github.com/sereiner/parrot/servers/pkg/middleware"
 )
 
-func (s *CronServer) getProcessor(redisSetting string, tasks []*conf.Task) (engine *Processor, err error) {
+func (s *OnceServer) getProcessor(redisSetting string, tasks []*conf.Task) (engine *Processor, err error) {
 	defer func() {
 		if err1 := recover(); err1 != nil {
 			err = fmt.Errorf("%v", err1)

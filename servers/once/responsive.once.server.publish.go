@@ -10,7 +10,7 @@ import (
 )
 
 //publish 将当前服务器的节点信息发布到注册中心
-func (w *CronResponsiveServer) publish() (err error) {
+func (w *OnceResponsiveServer) publish() (err error) {
 	addr := w.server.GetAddress()
 	ipPort := strings.Split(addr, "://")[1]
 	pubPath := registry.Join(w.currentConf.GetServerPubRootPath(), ipPort)
@@ -33,7 +33,7 @@ func (w *CronResponsiveServer) publish() (err error) {
 }
 
 //publishCheck 定时检查节点数据是否存在
-func (w *CronResponsiveServer) publishCheck(data string) {
+func (w *OnceResponsiveServer) publishCheck(data string) {
 LOOP:
 	for {
 		select {
@@ -49,7 +49,7 @@ LOOP:
 }
 
 //checkPubPath 检查已发布的节点，不存在则创建
-func (w *CronResponsiveServer) checkPubPath(data string) {
+func (w *OnceResponsiveServer) checkPubPath(data string) {
 	w.pubLock.Lock()
 	defer w.pubLock.Unlock()
 	for _, path := range w.pubs {
@@ -71,7 +71,7 @@ func (w *CronResponsiveServer) checkPubPath(data string) {
 }
 
 //unpublish 删除已发布的节点
-func (w *CronResponsiveServer) unpublish() {
+func (w *OnceResponsiveServer) unpublish() {
 	w.pubLock.Lock()
 	defer w.pubLock.Unlock()
 	for _, path := range w.pubs {

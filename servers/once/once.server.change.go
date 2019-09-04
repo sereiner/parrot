@@ -7,7 +7,7 @@ import (
 )
 
 //SetMetric 重置metric
-func (s *CronServer) SetMetric(metric *conf.Metric) error {
+func (s *OnceServer) SetMetric(metric *conf.Metric) error {
 	s.metric.Stop()
 	if metric.Disable {
 		return nil
@@ -20,19 +20,19 @@ func (s *CronServer) SetMetric(metric *conf.Metric) error {
 }
 
 //StopMetric stop metric
-func (s *CronServer) StopMetric() error {
+func (s *OnceServer) StopMetric() error {
 	s.metric.Stop()
 	return nil
 }
 
 //SetTasks 设置定时任务
-func (s *CronServer) SetTasks(redisSetting string, tasks []*conf.Task) (err error) {
+func (s *OnceServer) SetTasks(redisSetting string, tasks []*conf.Task) (err error) {
 	s.Processor, err = s.getProcessor(redisSetting, tasks)
 	return err
 }
 
 //SetTrace 显示跟踪信息
-func (s *CronServer) SetTrace(b bool) {
+func (s *OnceServer) SetTrace(b bool) {
 	s.conf.SetMetadata("show-trace", b)
 	return
 }

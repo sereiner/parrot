@@ -8,7 +8,7 @@ import (
 )
 
 //Notify 服务器配置变更通知
-func (w *CronResponsiveServer) Notify(conf conf.IServerConf) error {
+func (w *OnceResponsiveServer) Notify(conf conf.IServerConf) error {
 	w.mu.Lock()
 	defer w.mu.Unlock()
 	w.restarted = false
@@ -32,7 +32,7 @@ func (w *CronResponsiveServer) Notify(conf conf.IServerConf) error {
 }
 
 //NeedRestart 检查配置判断是否需要重启服务器
-func (w *CronResponsiveServer) NeedRestart(cnf conf.IServerConf) (bool, error) {
+func (w *OnceResponsiveServer) NeedRestart(cnf conf.IServerConf) (bool, error) {
 	if cnf.ForceRestart() {
 		return true, nil
 	}
@@ -64,7 +64,7 @@ func (w *CronResponsiveServer) NeedRestart(cnf conf.IServerConf) (bool, error) {
 }
 
 //SetConf 设置配置参数
-func (w *CronResponsiveServer) SetConf(restart bool, conf conf.IServerConf) (err error) {
+func (w *OnceResponsiveServer) SetConf(restart bool, conf conf.IServerConf) (err error) {
 	//设置分片数量
 	w.shardingCount = conf.GetInt("sharding", 0)
 

@@ -8,7 +8,7 @@ import (
 	"github.com/sereiner/parrot/servers/pkg/sharding"
 )
 
-func (s *CronResponsiveServer) watchMasterChange(root, path string) error {
+func (s *OnceResponsiveServer) watchMasterChange(root, path string) error {
 	cldrs, _, err := s.engine.GetRegistry().GetChildren(root)
 	if err != nil {
 		return err
@@ -55,12 +55,12 @@ func (s *CronResponsiveServer) watchMasterChange(root, path string) error {
 	return nil
 }
 
-func (s *CronResponsiveServer) isMaster(path string, cldrs []string) (isMaster bool) {
+func (s *OnceResponsiveServer) isMaster(path string, cldrs []string) (isMaster bool) {
 	s.shardingIndex, isMaster = sharding.IsMaster(s.master, s.shardingCount, path, cldrs)
 	return isMaster
 
 }
-func (s *CronResponsiveServer) notifyConsumer(v bool) error {
+func (s *OnceResponsiveServer) notifyConsumer(v bool) error {
 	if v {
 		return s.server.Resume()
 	}

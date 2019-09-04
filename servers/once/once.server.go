@@ -13,8 +13,7 @@ import (
 	"github.com/sereiner/parrot/servers/pkg/middleware"
 )
 
-//CronServer cron服务器
-type CronServer struct {
+type OnceServer struct {
 	*option
 	conf *conf.MetadataConf
 	*Processor
@@ -23,8 +22,8 @@ type CronServer struct {
 }
 
 //NewCronServer 创建mqc服务器
-func NewCronServer(name string, config string, tasks []*conf.Task, opts ...Option) (t *CronServer, err error) {
-	t = &CronServer{conf: &conf.MetadataConf{Name: name, Type: "once"}}
+func NewCronServer(name string, config string, tasks []*conf.Task, opts ...Option) (t *OnceServer, err error) {
+	t = &OnceServer{conf: &conf.MetadataConf{Name: name, Type: "once"}}
 	t.option = &option{metric: middleware.NewMetric(t.conf)}
 	for _, opt := range opts {
 		opt(t.option)
@@ -38,11 +37,11 @@ func NewCronServer(name string, config string, tasks []*conf.Task, opts ...Optio
 	t.SetTrace(t.showTrace)
 	return
 }
-func (s *CronServer) Start() error {
+func (s *OnceServer) Start() error {
 	return s.Run()
 }
 
-func (s *CronServer) Run() error {
+func (s *OnceServer) Run() error {
 	if s.running == servers.ST_RUNNING {
 		return nil
 	}
@@ -63,7 +62,7 @@ func (s *CronServer) Run() error {
 }
 
 //Shutdown 关闭服务器
-func (s *CronServer) Shutdown(time.Duration) {
+func (s *OnceServer) Shutdown(time.Duration) {
 	if s.Processor != nil {
 		s.running = servers.ST_STOP
 		s.Processor.Close()
@@ -71,7 +70,7 @@ func (s *CronServer) Shutdown(time.Duration) {
 }
 
 //Pause 暂停服务器
-func (s *CronServer) Pause() {
+func (s *OnceServer) Pause() {
 	if s.Processor != nil {
 		s.running = servers.ST_PAUSE
 		s.Processor.Pause()
@@ -80,7 +79,7 @@ func (s *CronServer) Pause() {
 }
 
 //Resume 恢复执行
-func (s *CronServer) Resume() error {
+func (s *OnceServer) Resume() error {
 	if s.Processor != nil {
 		s.running = servers.ST_RUNNING
 		s.Processor.Resume()
@@ -89,17 +88,17 @@ func (s *CronServer) Resume() error {
 }
 
 //GetAddress 获取当前服务地址
-func (s *CronServer) GetAddress() string {
+func (s *OnceServer) GetAddress() string {
 	return fmt.Sprintf("once://%s", net.GetLocalIPAddress())
 }
 
 //GetStatus 获取当前服务器状态
-func (s *CronServer) GetStatus() string {
+func (s *OnceServer) GetStatus() string {
 	return s.running
 }
 
 //Dynamic 动态注册或撤销cron任务
-func (s *CronServer) Dynamic(engine servers.IRegistryEngine, c chan *conf.Task) {
+func (s *OnceServer) Dynamic(engine servers.IRegistryEngine, c chan *conf.Task) {
 	for {
 		select {
 		case <-time.After(time.Millisecond * 100):

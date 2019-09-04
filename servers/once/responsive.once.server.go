@@ -12,9 +12,8 @@ import (
 	"github.com/sereiner/parrot/servers"
 )
 
-//CronResponsiveServer rpc 响应式服务器
-type CronResponsiveServer struct {
-	server        *CronServer
+type OnceResponsiveServer struct {
+	server        *OnceServer
 	engine        servers.IRegistryEngine
 	registryAddr  string
 	pubs          []string
@@ -32,8 +31,8 @@ type CronResponsiveServer struct {
 }
 
 //NewCronResponsiveServer 创建rpc服务器
-func NewOnceResponsiveServer(registryAddr string, cnf conf.IServerConf, logger *logger.Logger) (h *CronResponsiveServer, err error) {
-	h = &CronResponsiveServer{
+func NewOnceResponsiveServer(registryAddr string, cnf conf.IServerConf, logger *logger.Logger) (h *OnceResponsiveServer, err error) {
+	h = &OnceResponsiveServer{
 		closeChan:    make(chan struct{}),
 		currentConf:  cnf,
 		Logger:       logger,
@@ -66,7 +65,7 @@ func NewOnceResponsiveServer(registryAddr string, cnf conf.IServerConf, logger *
 }
 
 //Restart 重启服务器
-func (w *CronResponsiveServer) Restart(cnf conf.IServerConf) (err error) {
+func (w *OnceResponsiveServer) Restart(cnf conf.IServerConf) (err error) {
 	w.Shutdown()
 	time.Sleep(time.Second)
 	w.closeChan = make(chan struct{})
@@ -105,7 +104,7 @@ func (w *CronResponsiveServer) Restart(cnf conf.IServerConf) (err error) {
 }
 
 //Start 启用服务
-func (w *CronResponsiveServer) Start() (err error) {
+func (w *OnceResponsiveServer) Start() (err error) {
 	err = w.server.Run()
 	if err != nil {
 		return
@@ -114,7 +113,7 @@ func (w *CronResponsiveServer) Start() (err error) {
 }
 
 //Shutdown 关闭服务器
-func (w *CronResponsiveServer) Shutdown() {
+func (w *OnceResponsiveServer) Shutdown() {
 	w.done = true
 	w.once.Do(func() {
 		close(w.closeChan)
@@ -127,21 +126,21 @@ func (w *CronResponsiveServer) Shutdown() {
 }
 
 //GetAddress 获取服务器地址
-func (w *CronResponsiveServer) GetAddress() string {
+func (w *OnceResponsiveServer) GetAddress() string {
 	return w.server.GetAddress()
 }
 
 //GetStatus 获取当前服务器状态
-func (w *CronResponsiveServer) GetStatus() string {
+func (w *OnceResponsiveServer) GetStatus() string {
 	return w.server.GetStatus()
 }
 
 //GetServices 获取服务列表
-func (w *CronResponsiveServer) GetServices() map[string][]string {
+func (w *OnceResponsiveServer) GetServices() map[string][]string {
 	return w.engine.GetServices()
 }
 
 //Restarted 服务器是否已重启
-func (w *CronResponsiveServer) Restarted() bool {
+func (w *OnceResponsiveServer) Restarted() bool {
 	return w.restarted
 }
