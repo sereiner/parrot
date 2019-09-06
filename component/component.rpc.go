@@ -53,7 +53,7 @@ func (c *CustomRPC) GetConn(service string) (*grpc.ClientConn, error) {
 	}
 	r := balancer.NewResolver(rpcConf.Register, service)
 	resolver.Register(r)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	conn, err := grpc.DialContext(
 		ctx,
 		r.Scheme()+"://authority/"+service,
@@ -62,7 +62,7 @@ func (c *CustomRPC) GetConn(service string) (*grpc.ClientConn, error) {
 		grpc.WithBlock())
 	defer cancel()
 	if err != nil {
-		panic(fmt.Errorf("创建grpc客户端失败,请确保服务端存在"))
+		return nil, fmt.Errorf("创建grpc客户端失败,请确保服务端存在")
 	}
 	return conn, nil
 }
@@ -70,7 +70,6 @@ func (c *CustomRPC) GetConn(service string) (*grpc.ClientConn, error) {
 func (c *CustomRPC) SetRpcClient(name string, r interface{}) {
 	c.rpcMap.Store(name, r)
 }
-
 
 func (c *CustomRPC) GetRpcClient(name string) (value interface{}, ok bool) {
 	return c.rpcMap.Load(name)
