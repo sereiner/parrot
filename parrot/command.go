@@ -9,7 +9,10 @@ import (
 )
 
 //VERSION 版本号
-var VERSION = "2.0.0"
+var (
+	VERSION   = "2.0.0"
+	BuildTime = ""
+)
 
 func (m *MicroApp) getCliApp() *cli.App {
 	app := cli.NewApp()
@@ -73,9 +76,14 @@ func (m *MicroApp) getCommands() []cli.Command {
 			Usage:  "查看配置信息。查看当前服务在配置中心的配置信息",
 			Flags:  m.getStartFlags("conf"),
 			Action: m.queryConfigAction,
+		}, {
+			Name:   "v",
+			Usage:  "查看版本信息,编译时间",
+			Action: m.versionAction,
 		},
 	}
 }
+
 func (m *MicroApp) getStartFlags(name string) []cli.Flag {
 	flags := make([]cli.Flag, 0, 4)
 	if m.RegistryAddr == "" {

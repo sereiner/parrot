@@ -95,6 +95,12 @@ func (m *MicroApp) statusAction(c *cli.Context) (err error) {
 	return nil
 }
 
+func (m *MicroApp) versionAction(c *cli.Context) (err error) {
+	m.xlogger.Debug("git version: ",VERSION)
+	m.xlogger.Debug("build time: ", BuildTime)
+	return nil
+}
+
 func (m *MicroApp) install() (err error) {
 	m.logger.PauseLogging()
 	defer m.logger.StartLogging()

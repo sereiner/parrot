@@ -50,7 +50,7 @@ func newCronTask(t *conf.Task) (r *cronTask, err error) {
 		ILogger: logger.GetSession(t.Name, logger.CreateSession()),
 	}
 
-	t.Cron = strings.ReplaceAll(t.Cron,"after","every")
+	t.Cron = strings.ReplaceAll(t.Cron, "after", "every")
 
 	r.schedule, err = cron.ParseStandard(t.Cron)
 	if err != nil {
