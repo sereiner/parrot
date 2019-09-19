@@ -45,7 +45,7 @@ type IContainer interface {
 	SaveGlobalObject(tpName string, name string, f func(c conf.IConf) (interface{}, error)) (bool, interface{}, error)
 	Close() error
 
-	GetConn(service string) (*grpc.ClientConn, error)
+	GetConn(platName,service string) (*grpc.ClientConn, error)
 	SetRpcClient(name string, r interface{})
 	GetRpcClient(name string) (value interface{}, ok bool)
 }

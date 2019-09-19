@@ -2,6 +2,8 @@ package rpc
 
 import (
 	"fmt"
+	"github.com/sereiner/library/balancer"
+	"net"
 	"path"
 	"strings"
 	"time"
@@ -18,9 +20,15 @@ func (w *RpcResponsiveServer) publish() (err error) {
 	if err = w.pubServiceNode(); err != nil {
 		return
 	}
+
+	if err = w.pubServiceEtcdNode(); err != nil {
+		return
+	}
+
 	go w.publishCheck()
 	return
 }
+
 func (w *RpcResponsiveServer) pubServerNode() error {
 	addr := w.server.GetAddress()
 	ipPort := strings.Split(addr, "://")[1]
@@ -41,6 +49,30 @@ func (w *RpcResponsiveServer) pubServerNode() error {
 	w.pubs[pubPath] = nodeData
 	return nil
 }
+
+func (w *RpcResponsiveServer) pubServiceEtcdNode() error {
+	addr := w.server.GetAddress(w.currentConf.GetString("dn"))
+	ipPort := strings.Split(addr, "://")[1]
+	ip := strings.Split(ipPort, ":")[0]
+	port := strings.Split(ipPort, ":")[1]
+
+	rg := strings.Split(w.registryAddr, "://")
+	rgUrl := rg[1]
+
+	_ , err  := net.DialTimeout("tcp", net.JoinHostPort(rgUrl, "2379"), time.Second*3)
+	if err != nil{
+		// 没有开启etcd
+		return nil
+	}
+
+	err = balancer.Register(net.JoinHostPort(rgUrl, "2379"), w.currentConf.GetPlatName(), w.currentConf.GetSysName(), ip, port, time.Second*10, 15)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (w *RpcResponsiveServer) pubServiceNode() error {
 	addr := w.server.GetAddress(w.currentConf.GetString("dn"))
 	ipPort := strings.Split(addr, "://")[1]
@@ -115,5 +147,14 @@ func (w *RpcResponsiveServer) unpublish() {
 	for path := range w.pubs {
 		w.engine.GetRegistry().Delete(path)
 	}
+
+	rg := strings.Split(w.registryAddr, "://")
+	rgUrl := rg[1]
+	_ , err  := net.DialTimeout("tcp", net.JoinHostPort(rgUrl, "2379"), time.Second*3)
+	if err == nil{
+		// 没有开启etcd
+		balancer.UnRegister()
+	}
+
 	w.pubs = make(map[string]string)
 }

@@ -19,7 +19,7 @@ const RPCTypeNameInVar = "rpc"
 const RPCNameInVar = "rpc"
 
 type IComponentRPC interface {
-	GetConn(service string) (*grpc.ClientConn, error)
+	GetConn(platName,service string) (*grpc.ClientConn, error)
 	SetRpcClient(name string, r interface{})
 	GetRpcClient(name string) (value interface{}, ok bool)
 }
@@ -37,7 +37,7 @@ func NewCustomRPC(c IContainer, name ...string) *CustomRPC {
 	return &CustomRPC{IContainer: c, name: DBNameInVar, rpcMap: sync.Map{}}
 }
 
-func (c *CustomRPC) GetConn(service string) (*grpc.ClientConn, error) {
+func (c *CustomRPC) GetConn(platName,service string) (*grpc.ClientConn, error) {
 
 	cacheConf, err := c.IContainer.GetVarConf(RPCTypeNameInVar, RPCNameInVar)
 	if err != nil {
@@ -51,7 +51,7 @@ func (c *CustomRPC) GetConn(service string) (*grpc.ClientConn, error) {
 	if b, err := govalidator.ValidateStruct(&rpcConf); !b {
 		return nil, err
 	}
-	r := balancer.NewResolver(rpcConf.Register, service)
+	r := balancer.NewResolver(rpcConf.Register,platName, service)
 	resolver.Register(r)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	conn, err := grpc.DialContext(

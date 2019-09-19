@@ -126,6 +126,8 @@ github.com/samuel/go-zookeeper v0.0.0-20180130194729-c4fab1ac1bec/go.mod h1:gi+0
 github.com/schollz/progressbar/v2 v2.12.1/go.mod h1:fBI3onORwtNtwCWJHsrXtjE3QnJOtqIZrvr3rDaF7L0=
 github.com/sereiner/library v0.0.0-20190903013922-70ae2c5e6bc1 h1:Y6hysW2+DKPmZQQIzxZBqp0V/6vJf8wxhCwvZo3m3lc=
 github.com/sereiner/library v0.0.0-20190903013922-70ae2c5e6bc1/go.mod h1:tYq9nd2J5/OFeiT3bNvwpd6KjB4lUlfmkU79c3qjM98=
+github.com/sereiner/library v0.0.0-20190919022905-968dbc2dcbfc h1:YioUztNtXT9EY29qxXub4jVakDbL/kVO7oSBnsPUCEk=
+github.com/sereiner/library v0.0.0-20190919022905-968dbc2dcbfc/go.mod h1:6JG9+VC+ZqCNtfcXh4svd2oRBVEQGV+yBFZG4P3Eayo=
 github.com/shirou/gopsutil v2.18.12+incompatible/go.mod h1:5b4v6he4MtMOwMlS0TUMTu2PcXUg8+E1lC7eC3UO/RA=
 github.com/shirou/gopsutil v2.19.6+incompatible h1:49/Gru26Lne9Cl3IoAVDZVM09hvkSrUodgIIsCVRwbs=
 github.com/shirou/gopsutil v2.19.6+incompatible/go.mod h1:WWnYX4lzhCH5h/3YBfyVA3VbLYjlMZZAQcW9ojMexNc=

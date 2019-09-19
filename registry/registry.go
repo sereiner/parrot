@@ -120,6 +120,7 @@ func Join(elem ...string) string {
 	return strings.Replace(path, "\\", "/", -1)
 
 }
+
 func getUPAddress(addr string) (u string, p string, address string, err error) {
 	if !strings.Contains(addr, "@") {
 		return "", "", addr, nil
