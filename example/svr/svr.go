@@ -18,6 +18,7 @@ import (
 
 var (
 	log  = logger.GetSession("grpc", logger.CreateSession())
+	plat = flag.String("plat", "hello_service", "service name")
 	serv = flag.String("service", "hello_service", "service name")
 	host = flag.String("host", "localhost", "listening host")
 	port = flag.String("port", "50001", "listening port")
@@ -32,7 +33,7 @@ func main() {
 		panic(err)
 	}
 
-	err = balancer.Register(*reg, *serv, *host, *port, time.Second*10, 15)
+	err = balancer.Register(*reg,*plat, *serv, *host, *port, time.Second*10, 15)
 	if err != nil {
 		panic(err)
 	}

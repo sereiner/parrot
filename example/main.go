@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
+	"github.com/sereiner/parrot/example/helloworld"
 
 	//pb "github.com/sereiner/parrot/example/helloworld"
 	"github.com/sereiner/parrot/parrot"
@@ -28,12 +29,12 @@ func main() {
 
 	app.Initializing(func(c component.IContainer) error {
 
-		//conn, err := c.GetConn("hello_service")
-		//if err != nil {
-		//	return err
-		//}
-		//
-		//c.SetRpcClient("hello_service", pb.NewGreeterClient(conn))
+		conn, err := c.GetConn("hello_service","hello_service")
+		if err != nil {
+			return err
+		}
+
+		c.SetRpcClient("hello_service", helloworld.NewGreeterClient(conn))
 
 		return nil
 	})

@@ -3,10 +3,7 @@ package component
 import (
 	"context"
 	"fmt"
-	"github.com/asaskevich/govalidator"
 	"github.com/sereiner/library/balancer"
-	"github.com/sereiner/parrot/conf"
-	"github.com/sereiner/parrot/registry"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/resolver"
@@ -14,12 +11,8 @@ import (
 	"time"
 )
 
-const RPCTypeNameInVar = "rpc"
-
-const RPCNameInVar = "rpc"
-
 type IComponentRPC interface {
-	GetConn(platName,service string) (*grpc.ClientConn, error)
+	GetConn(platName, service string) (*grpc.ClientConn, error)
 	SetRpcClient(name string, r interface{})
 	GetRpcClient(name string) (value interface{}, ok bool)
 }
@@ -37,26 +30,14 @@ func NewCustomRPC(c IContainer, name ...string) *CustomRPC {
 	return &CustomRPC{IContainer: c, name: DBNameInVar, rpcMap: sync.Map{}}
 }
 
-func (c *CustomRPC) GetConn(platName,service string) (*grpc.ClientConn, error) {
+func (c *CustomRPC) GetConn(platName, serverName string) (*grpc.ClientConn, error) {
 
-	cacheConf, err := c.IContainer.GetVarConf(RPCTypeNameInVar, RPCNameInVar)
-	if err != nil {
-		return nil, fmt.Errorf("%s %v", registry.Join("/", c.GetPlatName(), "var", RPCTypeNameInVar, RPCNameInVar), err)
-	}
-
-	var rpcConf conf.RPCConf
-	if err = cacheConf.Unmarshal(&rpcConf); err != nil {
-		return nil, err
-	}
-	if b, err := govalidator.ValidateStruct(&rpcConf); !b {
-		return nil, err
-	}
-	r := balancer.NewResolver(rpcConf.Register,platName, service)
+	r := balancer.NewResolver("", platName, serverName)
 	resolver.Register(r)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	conn, err := grpc.DialContext(
 		ctx,
-		r.Scheme()+"://authority/"+service,
+		r.Scheme()+"://authority/",
 		grpc.WithInsecure(),
 		grpc.WithBalancerName(roundrobin.Name),
 		grpc.WithBlock())

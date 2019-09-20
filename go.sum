@@ -128,6 +128,9 @@ github.com/sereiner/library v0.0.0-20190903013922-70ae2c5e6bc1 h1:Y6hysW2+DKPmZQ
 github.com/sereiner/library v0.0.0-20190903013922-70ae2c5e6bc1/go.mod h1:tYq9nd2J5/OFeiT3bNvwpd6KjB4lUlfmkU79c3qjM98=
 github.com/sereiner/library v0.0.0-20190919022905-968dbc2dcbfc h1:YioUztNtXT9EY29qxXub4jVakDbL/kVO7oSBnsPUCEk=
 github.com/sereiner/library v0.0.0-20190919022905-968dbc2dcbfc/go.mod h1:6JG9+VC+ZqCNtfcXh4svd2oRBVEQGV+yBFZG4P3Eayo=
+github.com/sereiner/library v0.0.0-20190919033832-0c1487a0a55c/go.mod h1:5xLr+Ya8DFs7j6MrHqNJz0VCJNt04UidV9q9E+l5JZA=
+github.com/sereiner/library v0.0.0-20190920031452-3a54c7baf5f6 h1:rdGul0yxi0cjKUVlYGR+iGvSCO2FdU7gE+1UhtVHTg0=
+github.com/sereiner/library v0.0.0-20190920031452-3a54c7baf5f6/go.mod h1:5xLr+Ya8DFs7j6MrHqNJz0VCJNt04UidV9q9E+l5JZA=
 github.com/shirou/gopsutil v2.18.12+incompatible/go.mod h1:5b4v6he4MtMOwMlS0TUMTu2PcXUg8+E1lC7eC3UO/RA=
 github.com/shirou/gopsutil v2.19.6+incompatible h1:49/Gru26Lne9Cl3IoAVDZVM09hvkSrUodgIIsCVRwbs=
 github.com/shirou/gopsutil v2.19.6+incompatible/go.mod h1:WWnYX4lzhCH5h/3YBfyVA3VbLYjlMZZAQcW9ojMexNc=
