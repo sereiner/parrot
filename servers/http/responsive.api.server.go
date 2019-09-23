@@ -2,6 +2,7 @@ package http
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"os"
 	"sync"
 	"time"
@@ -162,4 +163,8 @@ func (w *ApiResponsiveServer) GetServices() map[string][]string {
 //Restarted 服务器是否已重启
 func (w *ApiResponsiveServer) Restarted() bool {
 	return w.restarted
+}
+
+func (w *ApiResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+
 }

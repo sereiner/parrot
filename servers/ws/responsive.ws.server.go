@@ -2,6 +2,7 @@ package ws
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"sync"
 	"time"
 
@@ -156,4 +157,8 @@ func (w *WSServerResponsiveServer) GetServices() map[string][]string {
 //Restarted 服务器是否已重启
 func (w *WSServerResponsiveServer) Restarted() bool {
 	return w.restarted
+}
+
+func (w *WSServerResponsiveServer) SetPb(f func(component.IContainer,*grpc.Server)) {
+
 }

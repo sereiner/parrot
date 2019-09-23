@@ -2,6 +2,8 @@ package parrot
 
 import (
 	"fmt"
+	"github.com/sereiner/parrot/component"
+	"google.golang.org/grpc"
 	"strings"
 )
 
@@ -25,10 +27,17 @@ type option struct {
 	remoteLogger       bool
 	RemoteLogger       bool
 	RemoteQueryService bool
+	PbFunc             func(component.IContainer,*grpc.Server)
 }
 
 //Option 配置选项
 type Option func(*option)
+
+func WithPbRegister(f func(component.IContainer,*grpc.Server)) Option {
+	return func(o *option) {
+		o.PbFunc = f
+	}
+}
 
 //WithRegistry 设置注册中心地址
 func WithRegistry(addr string) Option {

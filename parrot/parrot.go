@@ -2,6 +2,7 @@ package parrot
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"os"
 	"os/signal"
 	"runtime/debug"
@@ -42,10 +43,11 @@ type parrot struct {
 	trace          string
 	done           bool
 	remoteLogger   bool
+	PbFunc         func(component.IContainer,*grpc.Server)
 }
 
 //Newparrot 创建parrot服务器
-func Newparrot(appName string, platName string, systemName string, serverTypes []string, clusterName string, trace string, registryAddr string, isDebug bool, remoteLogger bool, logger *logger.Logger, r component.IComponentHandler) *parrot {
+func Newparrot(appName string, platName string, systemName string, serverTypes []string, clusterName string, trace string, registryAddr string, isDebug bool, remoteLogger bool, logger *logger.Logger, r component.IComponentHandler, PbFunc func(component.IContainer,*grpc.Server)) *parrot {
 	servers.IsDebug = isDebug
 	return &parrot{
 		appName:        appName,
@@ -64,6 +66,7 @@ func Newparrot(appName string, platName string, systemName string, serverTypes [
 		registryAddr: registryAddr,
 		remoteLogger: remoteLogger,
 		trace:        trace,
+		PbFunc:       PbFunc,
 	}
 }
 
@@ -131,7 +134,7 @@ func (h *parrot) startWatch() (err error) {
 	}
 
 	//创建服务管理器
-	h.rspServer = newRspServer(h.registryAddr, h.registry, h.cHandler, h.logger)
+	h.rspServer = newRspServer(h.registryAddr, h.registry, h.cHandler, h.PbFunc, h.logger)
 
 	//循环接收服务变更新通知
 	go h.loopRecvNotify()

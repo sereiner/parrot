@@ -59,13 +59,13 @@ func (w *RpcResponsiveServer) pubServiceEtcdNode() error {
 	rg := strings.Split(w.registryAddr, "://")
 	rgUrl := rg[1]
 
-	_ , err  := net.DialTimeout("tcp", net.JoinHostPort(rgUrl, "2379"), time.Second*3)
-	if err != nil{
+	_, err := net.DialTimeout("tcp", net.JoinHostPort(rgUrl, "2379"), time.Second*3)
+	if err != nil {
 		// 没有开启etcd
 		return nil
 	}
 
-	err = balancer.Register(net.JoinHostPort(rgUrl, "2379"), w.currentConf.GetPlatName(), w.currentConf.GetSysName(), ip, port, time.Second*10, 15)
+	err = balancer.Register("", w.currentConf.GetPlatName(), w.currentConf.GetSysName(), ip, port, time.Second*10, 15)
 	if err != nil {
 		return err
 	}
@@ -150,8 +150,8 @@ func (w *RpcResponsiveServer) unpublish() {
 
 	rg := strings.Split(w.registryAddr, "://")
 	rgUrl := rg[1]
-	_ , err  := net.DialTimeout("tcp", net.JoinHostPort(rgUrl, "2379"), time.Second*3)
-	if err == nil{
+	_, err := net.DialTimeout("tcp", net.JoinHostPort(rgUrl, "2379"), time.Second*3)
+	if err == nil {
 		// 没有开启etcd
 		balancer.UnRegister()
 	}

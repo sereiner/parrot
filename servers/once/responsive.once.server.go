@@ -2,6 +2,7 @@ package once
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"sync"
 	"time"
 
@@ -143,4 +144,8 @@ func (w *OnceResponsiveServer) GetServices() map[string][]string {
 //Restarted 服务器是否已重启
 func (w *OnceResponsiveServer) Restarted() bool {
 	return w.restarted
+}
+
+func (w *OnceResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+
 }

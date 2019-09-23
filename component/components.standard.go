@@ -77,20 +77,20 @@ func NewStandardComponent(componentName string, c IContainer) *StandardComponent
 	return r
 }
 
-func (m *StandardComponent) GetMeta(key string) interface{} {
-	m.metaLock.RLocker().Lock()
-	defer m.metaLock.RLocker().Unlock()
+func (r *StandardComponent) GetMeta(key string) interface{} {
+	r.metaLock.RLocker().Lock()
+	defer r.metaLock.RLocker().Unlock()
 
-	data := m.metaData[key]
+	data := r.metaData[key]
 	return data
 }
-func (m *StandardComponent) SetMeta(key string, value interface{}) {
-	m.metaLock.Lock()
-	defer m.metaLock.Unlock()
-	if m.metaData == nil {
-		m.metaData = make(map[string]interface{})
+func (r *StandardComponent) SetMeta(key string, value interface{}) {
+	r.metaLock.Lock()
+	defer r.metaLock.Unlock()
+	if r.metaData == nil {
+		r.metaData = make(map[string]interface{})
 	}
-	m.metaData[key] = value
+	r.metaData[key] = value
 }
 
 //AddRPCProxy 添加RPC代理

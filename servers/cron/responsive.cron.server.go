@@ -2,6 +2,7 @@ package cron
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"sync"
 	"time"
 
@@ -144,4 +145,8 @@ func (w *CronResponsiveServer) GetServices() map[string][]string {
 //Restarted 服务器是否已重启
 func (w *CronResponsiveServer) Restarted() bool {
 	return w.restarted
+}
+
+func (w *CronResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+
 }

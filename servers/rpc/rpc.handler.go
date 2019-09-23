@@ -51,6 +51,7 @@ func GetRouters() *Routers {
 func (r *Routers) Get() []*conf.Router {
 	return r.routers
 }
+
 func (r *Routers) Route(method string, name string, f servers.IRegistryEngine) {
 	r.routers = append(r.routers,
 		&conf.Router{

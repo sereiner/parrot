@@ -96,7 +96,7 @@ func (m *MicroApp) statusAction(c *cli.Context) (err error) {
 }
 
 func (m *MicroApp) versionAction(c *cli.Context) (err error) {
-	m.xlogger.Debug("git version: ",VERSION)
+	m.xlogger.Debug("git version: ", VERSION)
 	m.xlogger.Debug("build time: ", BuildTime)
 	return nil
 }

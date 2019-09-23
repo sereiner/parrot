@@ -2,6 +2,8 @@ package parrot
 
 import (
 	"errors"
+	"github.com/sereiner/parrot/component"
+	"google.golang.org/grpc"
 
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/conf"
@@ -25,15 +27,17 @@ type server struct {
 	startTime time.Time
 	logger    *logger.Logger
 	server    servers.IRegistryServer
+	PbFunc    func(component.IContainer,*grpc.Server)
 }
 
 //newServer 初始化服务器
-func newServer(cnf conf.IServerConf, registryAddr string, registry registry.IRegistry) *server {
+func newServer(cnf conf.IServerConf, registryAddr string, registry registry.IRegistry, PbFunc func(component.IContainer,*grpc.Server)) *server {
 	return &server{
 		cnf:          cnf,
 		registryAddr: registryAddr,
 		registry:     registry,
 		logger:       logger.New(cnf.GetServerName()),
+		PbFunc:       PbFunc,
 	}
 }
 
@@ -44,6 +48,7 @@ func (h *server) Start() (err error) {
 	if err != nil {
 		return err
 	}
+	h.server.SetPb(h.PbFunc)
 	err = h.server.Start()
 	if err != nil {
 		return err

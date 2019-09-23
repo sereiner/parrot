@@ -2,6 +2,7 @@ package mqc
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"sync"
 	"time"
 
@@ -144,4 +145,8 @@ func (w *MqcResponsiveServer) GetServices() map[string][]string {
 //Restarted 服务器是否已重启
 func (w *MqcResponsiveServer) Restarted() bool {
 	return w.restarted
+}
+
+func (w *MqcResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+
 }

@@ -71,9 +71,7 @@ func (w *RpcResponsiveServer) SetConf(restart bool, conf conf.IServerConf) (err 
 			return err
 		}
 	}
-	if err != nil {
-		return
-	}
+
 	//设置jwt安全认证
 	if ok, err = SetJWT(w.server, conf); err != nil {
 		return err

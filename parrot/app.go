@@ -106,7 +106,7 @@ func (m *MicroApp) action(c *cli.Context) (err error) {
 	}
 
 	m.parrot = Newparrot(m.app.Name, m.PlatName, m.SystemName, m.ServerTypes, m.ClusterName, m.Trace,
-		m.RegistryAddr, m.IsDebug, m.RemoteLogger, m.logger, m.IComponentRegistry)
+		m.RegistryAddr, m.IsDebug, m.RemoteLogger, m.logger, m.IComponentRegistry,m.PbFunc)
 
 	m.run()
 	// if _, err := m.parrot.Start(); err != nil {

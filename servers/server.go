@@ -2,6 +2,7 @@ package servers
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 
 	logger "github.com/sereiner/library/log"
 	"github.com/sereiner/parrot/component"
@@ -31,6 +32,7 @@ type IRegistryServer interface {
 	Restarted() bool
 	GetStatus() string
 	Shutdown()
+	SetPb(f func(component.IContainer,*grpc.Server))
 }
 
 type IExecuter interface {

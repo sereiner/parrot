@@ -2,6 +2,7 @@ package http
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
 	"sync"
 	"time"
 
@@ -80,4 +81,8 @@ func (w *WebResponsiveServer) Restart(cnf conf.IServerConf) (err error) {
 		return
 	}
 	return w.Start()
+}
+
+func (w *WebResponsiveServer) SetPb(f func(component.IContainer,*grpc.Server)) {
+
 }

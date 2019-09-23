@@ -3,6 +3,7 @@ package rpc
 import (
 	"errors"
 	"fmt"
+	"github.com/sereiner/parrot/component"
 	"net"
 	"os/exec"
 	"strconv"
@@ -32,6 +33,7 @@ type RpcServer struct {
 	port    string
 	addr    string
 	host    string
+	f       func(component.IContainer,*grpc.Server)
 }
 
 //NewRpcServer 创建rpc服务器
@@ -39,7 +41,7 @@ func NewRpcServer(name string, address string, routers []*conf.Router, opts ...O
 	t = &RpcServer{conf: &conf.MetadataConf{
 		Name: name,
 		Type: "rpc",
-	}}
+	}, f: nil}
 	if t.addr, err = t.getAddress(address); err != nil {
 		return nil, err
 	}
@@ -71,8 +73,15 @@ func NewRpcServer(name string, address string, routers []*conf.Router, opts ...O
 	return
 }
 
+func (s *RpcServer) SetPb(f func(component.IContainer,*grpc.Server)) {
+	s.f = f
+}
+
 // Run the http server
 func (s *RpcServer) Run() error {
+	if s.f != nil {
+		s.f(s.engine)
+	}
 	pb.RegisterRPCServer(s.engine, s.Processor)
 	s.proto = "tcp"
 	s.running = servers.ST_RUNNING

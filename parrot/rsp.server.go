@@ -2,6 +2,7 @@ package parrot
 
 import (
 	"github.com/sereiner/parrot/component"
+	"google.golang.org/grpc"
 	"strings"
 	"sync"
 	"time"
@@ -21,15 +22,17 @@ type rspServer struct {
 	registryAddr string
 	logger       *logger.Logger
 	handler      component.IComponentHandler
+	PbFunc       func(component.IContainer,*grpc.Server)
 	done         bool
 }
 
-func newRspServer(registryAddr string, registry registry.IRegistry, handler component.IComponentHandler, logger *logger.Logger) *rspServer {
+func newRspServer(registryAddr string, registry registry.IRegistry, handler component.IComponentHandler, f func(component.IContainer,*grpc.Server), logger *logger.Logger) *rspServer {
 	return &rspServer{
 		registry:     registry,
 		registryAddr: registryAddr,
 		servers:      make(map[string]*server),
 		handler:      handler,
+		PbFunc:       f,
 		logger:       logger,
 	}
 }
@@ -57,7 +60,7 @@ func (s *rspServer) Change(u *watcher.ContentChangeArgs) {
 					s.logger.Warnf("服务器(%s)配置为:stop", u.Path)
 					return
 				}
-				server := newServer(conf, s.registryAddr, s.registry)
+				server := newServer(conf, s.registryAddr, s.registry, s.PbFunc)
 
 				server.logger.Infof("开始启动[%s]服务...", strings.ToUpper(conf.GetServerType()))
 				if err = server.Start(); err != nil {

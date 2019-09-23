@@ -33,7 +33,7 @@ func main() {
 		panic(err)
 	}
 
-	err = balancer.Register(*reg,*plat, *serv, *host, *port, time.Second*10, 15)
+	err = balancer.Register(*reg, *plat, *serv, *host, *port, time.Second*10, 15)
 	if err != nil {
 		panic(err)
 	}
