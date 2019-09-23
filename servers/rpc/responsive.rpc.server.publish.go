@@ -64,8 +64,9 @@ func (w *RpcResponsiveServer) pubServiceEtcdNode() error {
 		// 没有开启etcd
 		return nil
 	}
+	fmt.Println("etcd 注册地址",net.JoinHostPort(rgUrl, "2379"))
 
-	err = balancer.Register("", w.currentConf.GetPlatName(), w.currentConf.GetSysName(), ip, port, time.Second*10, 15)
+	err = balancer.Register(net.JoinHostPort(rgUrl, "2379"), w.currentConf.GetPlatName(), w.currentConf.GetSysName(), ip, port, time.Second*10, 15)
 	if err != nil {
 		return err
 	}
