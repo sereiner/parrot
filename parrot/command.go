@@ -91,11 +91,13 @@ func (m *MicroApp) getStartFlags(name string) []cli.Flag {
 			Name:        "registry,r",
 			Destination: &m.RegistryAddr,
 			EnvVar:      "parrot_registry",
-			Usage: "\033[;31m*\033[0m" + `注册中心地址,必须项。目前支持zookeeper(zk)和本地文件系统(fs)。注册中心用于保存服务启动和运行参数，
-	 服务注册与发现等数据，格式:proto://host。proto的取值有zk,fs; host的取值根据不同的注册中心各不同,
-	 如zookeeper则为ip地址(加端口号),多个ip用逗号分隔,如:zk://192.168.0.2,192.168.0.107:12181。本地文
-	 件系统为本地文件路径，可以是相对路径或绝对路径,如:fs://../;  此参数可以通过命令行参数指定，程序指
-	 定，也可从环境变量中获取，环境变量名为:`,
+			Usage: "\033[;31m*\033[0m" + `注册中心地址,必须项。目前支持zookeeper(zk),
+	 etcd(etcd只用于grpc的服务发现和负载均衡,与zk共用一个注册地址)和本地文件系统(fs)。
+	 注册中心用于保存服务启动和运行参数，服务注册与发现等数据，格式:proto://host。proto的取值有zk,fs;
+	 host的取值根据不同的注册中心各不同,如zookeeper则为ip地址(加端口号),
+	 多个ip用逗号分隔,如:zk://192.168.0.2,192.168.0.107:12181。本地文
+	 件系统为本地文件路径，可以是相对路径或绝对路径,如:fs://../;  
+     此参数可以通过命令行参数指定，程序指定，也可从环境变量中获取，环境变量名为:`,
 		})
 	}
 	if m.PlatName == "" && m.SystemName == "" && len(m.ServerTypes) == 0 && m.ClusterName == "" {
