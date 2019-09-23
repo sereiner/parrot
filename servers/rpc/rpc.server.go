@@ -79,9 +79,9 @@ func (s *RpcServer) SetPb(f func(component.IContainer,*grpc.Server)) {
 
 // Run the http server
 func (s *RpcServer) Run() error {
-	if s.f != nil {
-		s.f(s.engine)
-	}
+	//if s.f != nil {
+	//	s.f(s.engine)
+	//}
 	pb.RegisterRPCServer(s.engine, s.Processor)
 	s.proto = "tcp"
 	s.running = servers.ST_RUNNING
