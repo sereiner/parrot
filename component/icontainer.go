@@ -48,4 +48,6 @@ type IContainer interface {
 	GetConn(platName, service string) (*grpc.ClientConn, error)
 	SetRpcClient(name string, r interface{})
 	GetRpcClient(name string) (value interface{}, ok bool)
+
+	GetDingReport() (d DingMessage)
 }

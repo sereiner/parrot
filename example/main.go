@@ -4,11 +4,8 @@ import (
 	"fmt"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
-	"github.com/sereiner/parrot/example/greeter"
-	"github.com/sereiner/parrot/example/helloworld"
 	"github.com/sereiner/parrot/example/order"
 	"github.com/sereiner/parrot/parrot"
-	"google.golang.org/grpc"
 )
 
 func main() {
@@ -16,35 +13,23 @@ func main() {
 	app := parrot.NewApp(
 		parrot.WithPlatName("apiserver"),
 		parrot.WithSystemName("apiserver"),
-		parrot.WithServerTypes("once-rpc"),
-		parrot.WithDebug(),
-		parrot.WithPbRegister(RegisterPb))
+		parrot.WithServerTypes("once-rpc-api"),
+		parrot.WithDebug())
 
 	app.Conf.RPC.SetMainConf(`{"address":":8032"}`)
 
 	app.Conf.ONCE.SetSubConf("task", `{"tasks":[{"cron":"@after 5s","service":"/order/query"}]}`)
 
+	app.Conf.Plat.SetVarConf("ding","ding",`{"webhook":"https://oapi.dingtalk.com/robot/send?access_token=3340852f9ce446e6bed2cb8b32ea1a2fb30b8ded538dc1c2735d4d07730c5bc6"}`)
+
 	app.Initializing(func(c component.IContainer) error {
-
-		conn, err := c.GetConn("hello_service", "hello_service")
-		if err != nil {
-			return err
-		}
-
-		c.SetRpcClient("hello_service", helloworld.NewGreeterClient(conn))
 
 		return nil
 	})
 
 	app.Once("/order/query", order.NewQueryHandler)
 	app.Micro("/order", func(ctx *context.Context) (r interface{}) {
-		return "success"
+		return fmt.Errorf("下单失败")
 	})
 	app.Start()
-}
-
-func RegisterPb(c component.IContainer, s *grpc.Server) {
-
-	helloworld.RegisterGreeterServer(s, greeter.NewGreeter(c))
-	fmt.Println("注册完成")
 }

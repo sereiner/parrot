@@ -41,6 +41,7 @@ type ServiceEngine struct {
 	component.IComponentInfluxDB
 	component.IComponentQueue
 	component.IComponentGlobalVarObject
+	component.IComponentDing
 }
 
 //NewServiceEngine 构建服务引擎
@@ -53,6 +54,7 @@ func NewServiceEngine(conf conf.IServerConf, registryAddr string, log logger.ILo
 	e.IComponentInfluxDB = component.NewStandardInfluxDB(e, "influx")
 	e.IComponentQueue = component.NewStandardQueue(e, "queue")
 	e.IComponentGlobalVarObject = component.NewGlobalVarObjectCache(e)
+	e.IComponentDing = component.NewStandardDing(e)
 	e.loggers = cmap.New(8)
 	if e.registry, err = registry.NewRegistryWithAddress(registryAddr, log); err != nil {
 		return
@@ -66,7 +68,7 @@ func NewServiceEngine(conf conf.IServerConf, registryAddr string, log logger.ILo
 	return
 }
 
-//SetHandler 设置handler
+//TODO:SetHandler 设置handler
 func (r *ServiceEngine) SetHandler(h component.IComponentHandler) error {
 	if h == nil {
 		return nil
@@ -156,6 +158,9 @@ func (r *ServiceEngine) Execute(ctx *context.Context) (rs interface{}) {
 	if !ctx.Response.SkipHandle {
 		//当前服务处理
 		if rs = r.Handle(ctx); ctx.Response.HasError(rs) {
+			go func(rs interface{}) {
+				fmt.Println(r.GetDingReport().Text(fmt.Errorf("%v",rs).Error(), []string{}, false))
+			}(rs)
 			return rs
 		}
 	}
