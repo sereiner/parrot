@@ -147,7 +147,7 @@ func (w *RpcResponsiveServer) Restarted() bool {
 	return w.restarted
 }
 
-func (w *RpcResponsiveServer) SetPb(f func(component.IContainer,*grpc.Server)) {
+func (w *RpcResponsiveServer) SetPb(f func(component.IContainer, *grpc.Server)) {
 
 	w.server.SetPb(f)
 }

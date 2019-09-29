@@ -83,6 +83,6 @@ func (w *WebResponsiveServer) Restart(cnf conf.IServerConf) (err error) {
 	return w.Start()
 }
 
-func (w *WebResponsiveServer) SetPb(f func(component.IContainer,*grpc.Server)) {
+func (w *WebResponsiveServer) SetPb(f func(component.IContainer, *grpc.Server)) {
 
 }

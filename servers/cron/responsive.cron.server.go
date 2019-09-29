@@ -147,6 +147,6 @@ func (w *CronResponsiveServer) Restarted() bool {
 	return w.restarted
 }
 
-func (w *CronResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+func (w *CronResponsiveServer) SetPb(func(component.IContainer, *grpc.Server)) {
 
 }

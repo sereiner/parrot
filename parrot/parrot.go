@@ -43,11 +43,11 @@ type parrot struct {
 	trace          string
 	done           bool
 	remoteLogger   bool
-	PbFunc         func(component.IContainer,*grpc.Server)
+	PbFunc         func(component.IContainer, *grpc.Server)
 }
 
 //Newparrot 创建parrot服务器
-func Newparrot(appName string, platName string, systemName string, serverTypes []string, clusterName string, trace string, registryAddr string, isDebug bool, remoteLogger bool, logger *logger.Logger, r component.IComponentHandler, PbFunc func(component.IContainer,*grpc.Server)) *parrot {
+func Newparrot(appName string, platName string, systemName string, serverTypes []string, clusterName string, trace string, registryAddr string, isDebug bool, remoteLogger bool, logger *logger.Logger, r component.IComponentHandler, PbFunc func(component.IContainer, *grpc.Server)) *parrot {
 	servers.IsDebug = isDebug
 	return &parrot{
 		appName:        appName,

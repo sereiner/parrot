@@ -22,11 +22,11 @@ type rspServer struct {
 	registryAddr string
 	logger       *logger.Logger
 	handler      component.IComponentHandler
-	PbFunc       func(component.IContainer,*grpc.Server)
+	PbFunc       func(component.IContainer, *grpc.Server)
 	done         bool
 }
 
-func newRspServer(registryAddr string, registry registry.IRegistry, handler component.IComponentHandler, f func(component.IContainer,*grpc.Server), logger *logger.Logger) *rspServer {
+func newRspServer(registryAddr string, registry registry.IRegistry, handler component.IComponentHandler, f func(component.IContainer, *grpc.Server), logger *logger.Logger) *rspServer {
 	return &rspServer{
 		registry:     registry,
 		registryAddr: registryAddr,

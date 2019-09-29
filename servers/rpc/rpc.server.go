@@ -33,7 +33,7 @@ type RpcServer struct {
 	port    string
 	addr    string
 	host    string
-	f       func(component.IContainer,*grpc.Server)
+	f       func(component.IContainer, *grpc.Server)
 }
 
 //NewRpcServer 创建rpc服务器
@@ -73,7 +73,7 @@ func NewRpcServer(name string, address string, routers []*conf.Router, opts ...O
 	return
 }
 
-func (s *RpcServer) SetPb(f func(component.IContainer,*grpc.Server)) {
+func (s *RpcServer) SetPb(f func(component.IContainer, *grpc.Server)) {
 	s.f = f
 }
 

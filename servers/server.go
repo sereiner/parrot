@@ -32,7 +32,7 @@ type IRegistryServer interface {
 	Restarted() bool
 	GetStatus() string
 	Shutdown()
-	SetPb(f func(component.IContainer,*grpc.Server))
+	SetPb(f func(component.IContainer, *grpc.Server))
 }
 
 type IExecuter interface {

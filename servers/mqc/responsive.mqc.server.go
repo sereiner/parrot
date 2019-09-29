@@ -147,6 +147,6 @@ func (w *MqcResponsiveServer) Restarted() bool {
 	return w.restarted
 }
 
-func (w *MqcResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+func (w *MqcResponsiveServer) SetPb(func(component.IContainer, *grpc.Server)) {
 
 }

@@ -159,8 +159,7 @@ func (r *ServiceEngine) Execute(ctx *context.Context) (rs interface{}) {
 		//当前服务处理
 		if rs = r.Handle(ctx); ctx.Response.HasError(rs) {
 			go func(rs interface{}, ctx *context.Context) {
-				path, _ := ctx.Request.Http.GetPath()
-				r.GetDingReport().Text(fmt.Errorf("server path: %s \n %v", path, rs).Error(), []string{}, false)
+				fmt.Println(r.GetDingReport().Text(fmt.Errorf("%v", rs).Error(), ctx.Log.GetSessionID(), []string{}, false))
 			}(rs, ctx)
 			return rs
 		}

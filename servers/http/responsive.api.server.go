@@ -165,6 +165,6 @@ func (w *ApiResponsiveServer) Restarted() bool {
 	return w.restarted
 }
 
-func (w *ApiResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+func (w *ApiResponsiveServer) SetPb(func(component.IContainer, *grpc.Server)) {
 
 }

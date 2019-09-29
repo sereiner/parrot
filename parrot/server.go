@@ -27,11 +27,11 @@ type server struct {
 	startTime time.Time
 	logger    *logger.Logger
 	server    servers.IRegistryServer
-	PbFunc    func(component.IContainer,*grpc.Server)
+	PbFunc    func(component.IContainer, *grpc.Server)
 }
 
 //newServer 初始化服务器
-func newServer(cnf conf.IServerConf, registryAddr string, registry registry.IRegistry, PbFunc func(component.IContainer,*grpc.Server)) *server {
+func newServer(cnf conf.IServerConf, registryAddr string, registry registry.IRegistry, PbFunc func(component.IContainer, *grpc.Server)) *server {
 	return &server{
 		cnf:          cnf,
 		registryAddr: registryAddr,

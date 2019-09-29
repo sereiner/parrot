@@ -27,7 +27,7 @@ func (u *QueryHandler) Handle(ctx *context.Context) (r interface{}) {
 
 	v, ok := u.container.GetRpcClient("hello_service")
 	if !ok {
-		return fmt.Errorf("grpc 客户端错误")
+		return fmt.Errorf("hello_service grpc 客户端错误")
 	}
 	res, err := v.(pb.GreeterClient).SayHello(ct.Background(), &pb.HelloRequest{Name: "world haha"})
 	if err != nil {

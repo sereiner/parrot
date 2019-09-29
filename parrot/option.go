@@ -27,13 +27,13 @@ type option struct {
 	remoteLogger       bool
 	RemoteLogger       bool
 	RemoteQueryService bool
-	PbFunc             func(component.IContainer,*grpc.Server)
+	PbFunc             func(component.IContainer, *grpc.Server)
 }
 
 //Option 配置选项
 type Option func(*option)
 
-func WithPbRegister(f func(component.IContainer,*grpc.Server)) Option {
+func WithPbRegister(f func(component.IContainer, *grpc.Server)) Option {
 	return func(o *option) {
 		o.PbFunc = f
 	}

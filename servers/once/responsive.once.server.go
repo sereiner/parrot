@@ -146,6 +146,6 @@ func (w *OnceResponsiveServer) Restarted() bool {
 	return w.restarted
 }
 
-func (w *OnceResponsiveServer) SetPb(func(component.IContainer,*grpc.Server)) {
+func (w *OnceResponsiveServer) SetPb(func(component.IContainer, *grpc.Server)) {
 
 }
