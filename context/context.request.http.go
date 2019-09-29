@@ -73,13 +73,21 @@ func (c *httpRequest) GetHost() (string, error) {
 	return request.Host, nil
 }
 
+func (c *httpRequest) GetPath() (string, error) {
+	request, err := c.Get()
+	if err != nil {
+		return "", err
+	}
+	return request.URL.Path, nil
+}
+
 //GetClientIP 获取客户端IP地址
 func (c *httpRequest) GetClientIP() (string, error) {
 	request, err := c.Get()
 	if err != nil {
 		return "", err
 	}
-	proxy := []string{}
+	var proxy []string
 	if ips := request.Header.Get("X-Forwarded-For"); ips != "" {
 		proxy = strings.Split(ips, ",")
 	}
@@ -109,8 +117,8 @@ func (c *httpRequest) GetCookie(name string) (string, error) {
 }
 
 //GetImageExt 根据content-type获取文件扩展名
-func (w *httpRequest) GetImageExt() (string, error) {
-	header, err := w.GetHeader()
+func (c *httpRequest) GetImageExt() (string, error) {
+	header, err := c.GetHeader()
 	if err != nil {
 		return "", err
 	}
