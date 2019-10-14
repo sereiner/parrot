@@ -34,7 +34,7 @@ func (c *CustomRPC) GetConn(platName, serverName string) (*grpc.ClientConn, erro
 
 	r := balancer.NewResolver("", platName, serverName)
 	resolver.Register(r)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
 	conn, err := grpc.DialContext(
 		ctx,
 		r.Scheme()+"://authority/",
