@@ -222,6 +222,8 @@ func (r *StandardComponent) checkFuncType(name string, h interface{}) {
 		}
 	}
 }
+
+// TODO::反射初始化
 func (r *StandardComponent) callFuncType(name string, h interface{}) (i interface{}, err error) {
 	fv := reflect.ValueOf(h)
 	tp := reflect.TypeOf(h)

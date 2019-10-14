@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/example/order"
@@ -20,10 +19,10 @@ func main() {
 
 	app.Conf.ONCE.SetSubConf("task", `{"tasks":[{"cron":"@after 5s","service":"/order/query"}]}`)
 
-	app.Conf.Plat.SetVarConf("ding", "ding", `{
-		"webhook":"https://oapi.dingtalk.com/robot/send?access_token=3340852f9ce446e6bed2cb8b32ea1a2fb30b8ded538dc1c2735d4d07730c5bc6",
-		"monitor":"http://monitor.manyoujing.net"
-	}`)
+	//app.Conf.Plat.SetVarConf("ding", "ding", `{
+	//	"webhook":"https://oapi.dingtalk.com/robot/send?access_token=3340852f9ce446e6bed2cb8b32ea1a2fb30b8ded538dc1c2735d4d07730c5bc6",
+	//	"monitor":"http://monitor.manyoujing.net"
+	//}`)
 
 	app.Initializing(func(c component.IContainer) error {
 
@@ -32,7 +31,7 @@ func main() {
 
 	app.Once("/order/query", order.NewQueryHandler)
 	app.Micro("/order", func(ctx *context.Context) (r interface{}) {
-		return fmt.Errorf("下单失败")
+		return "success"
 	})
 	app.Start()
 }

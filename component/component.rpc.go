@@ -43,7 +43,7 @@ func (c *CustomRPC) GetConn(platName, serverName string) (*grpc.ClientConn, erro
 		grpc.WithBlock())
 	defer cancel()
 	if err != nil {
-		return nil, fmt.Errorf("创建grpc客户端失败,请确保服务端存在")
+		return nil, fmt.Errorf("创建grpc客户端失败,请确保服务端存在 err:%v",err)
 	}
 	return conn, nil
 }
