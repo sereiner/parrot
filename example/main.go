@@ -25,7 +25,12 @@ func main() {
 	//}`)
 
 	app.Initializing(func(c component.IContainer) error {
+		conn, err := c.GetConn("hello_service", "hello_service")
+		if err != nil {
+			return err
+		}
 
+		c.SetRpcClient("hello_service", conn)
 		return nil
 	})
 
