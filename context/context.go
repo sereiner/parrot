@@ -1,6 +1,7 @@
 package context
 
 import (
+	"github.com/gin-gonic/gin"
 	"strings"
 	"sync"
 
@@ -61,10 +62,11 @@ type Context struct {
 	Name      string
 	Engine    string
 	Service   string
+	GinContext *gin.Context
 }
 
 //GetContext 从缓存池中获取一个context
-func GetContext(component interface{}, name string, engine string, service string, container IContainer, queryString IData, form IData, param IData, setting IData, ext map[string]interface{}, logger *logger.Logger) *Context {
+func GetContext(g *gin.Context,component interface{}, name string, engine string, service string, container IContainer, queryString IData, form IData, param IData, setting IData, ext map[string]interface{}, logger *logger.Logger) *Context {
 	c := contextPool.Get().(*Context)
 	c.Request.reset(c, queryString, form, param, setting, ext)
 	c.Log = logger
@@ -74,6 +76,7 @@ func GetContext(component interface{}, name string, engine string, service strin
 	c.Engine = engine
 	c.Service = formatName(c.Request.Translate(service, false))
 	c.Meta = NewMeta()
+	c.GinContext = g
 	return c
 }
 
@@ -116,6 +119,7 @@ func (c *Context) Close() {
 	c.Response.clear()
 	c.RPC.clear()
 	c.container = nil
+	c.GinContext = nil
 	contextPool.Put(c)
 }
 func formatName(name string) string {

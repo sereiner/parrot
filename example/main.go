@@ -1,10 +1,16 @@
 package main
 
 import (
+	"bytes"
+	"encoding/csv"
+	"fmt"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/example/order"
 	"github.com/sereiner/parrot/parrot"
+	"go.uber.org/zap"
+	"net/http"
+	"time"
 )
 
 func main() {
@@ -25,18 +31,34 @@ func main() {
 	//}`)
 
 	app.Initializing(func(c component.IContainer) error {
-		conn, err := c.GetConn("hello_service", "hello_service")
-		if err != nil {
-			return err
-		}
 
-		c.SetRpcClient("hello_service", conn)
 		return nil
 	})
 
 	app.Once("/order/query", order.NewQueryHandler)
 	app.Micro("/order", func(ctx *context.Context) (r interface{}) {
 		return "success"
+	})
+	app.Micro("/download", func(ctx *context.Context) (r interface{}) {
+
+		bytesBuffer := &bytes.Buffer{}
+
+		writer := csv.NewWriter(bytesBuffer)
+		writer.Write([]string{
+			"书名",
+		})
+
+		writer.Write([]string{
+			"heheh",
+		})
+
+		writer.Flush()
+
+		ctx.GinContext.Writer.Header().Set("Content-Disposition", fmt.Sprintf("attachment;filename=回收端上架报表-%s.csv", time.Now().Format("2006-01-02 15:04:05")))
+
+		zap.L().Info("3. 返回数据")
+		ctx.GinContext.Data(http.StatusOK, "text/csv", bytesBuffer.Bytes())
+		return
 	})
 	app.Start()
 }

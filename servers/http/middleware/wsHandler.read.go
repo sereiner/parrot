@@ -113,7 +113,7 @@ func (c *wsHandler) wsAction(exhandler interface{}, ctx *gin.Context, conn *webs
 
 	//调用服务执行业务逻辑
 	wLogHead(ctx, service)
-	nctx := context.GetContext(exhandler, name,
+	nctx := context.GetContext(ctx,exhandler, name,
 		engine,
 		service,
 		ctn,

@@ -30,14 +30,6 @@ func NewCustomRPC(c IContainer, name ...string) *CustomRPC {
 	return &CustomRPC{IContainer: c, name: DBNameInVar, rpcMap: sync.Map{}}
 }
 
-func (c *CustomRPC) GetConnWithAddr(addr string) (*grpc.ClientConn, error) {
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
-	if err != nil {
-		return nil, fmt.Errorf("创建grpc客户端失败,请确保服务端存在addr:%s err:%v", addr, err)
-	}
-	return conn, nil
-}
-
 func (c *CustomRPC) GetConn(platName, serverName string) (*grpc.ClientConn, error) {
 
 	r := balancer.NewResolver("", platName, serverName)
@@ -51,7 +43,7 @@ func (c *CustomRPC) GetConn(platName, serverName string) (*grpc.ClientConn, erro
 		grpc.WithBlock())
 	defer cancel()
 	if err != nil {
-		return nil, fmt.Errorf("创建grpc客户端失败,请确保服务端存在 err:%v", err)
+		return nil, fmt.Errorf("创建grpc客户端失败,请确保服务端存在 err:%v",err)
 	}
 	return conn, nil
 }
