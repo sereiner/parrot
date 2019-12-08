@@ -3,6 +3,7 @@ package order
 import (
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
+	"github.com/sereiner/parrot/example/queues"
 )
 
 type TestModel struct {
@@ -22,5 +23,6 @@ func NewQueryHandler(container component.IContainer) (u *QueryHandler) {
 func (u *QueryHandler) Handle(ctx *context.Context) (r interface{}) {
 	// 从请求中获取参数
 
-	return "success"
+	return queues.Send(u.container,"test",`{"name":"jack","age":18}`)
+
 }

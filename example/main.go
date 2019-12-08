@@ -1,16 +1,10 @@
 package main
 
 import (
-	"bytes"
-	"encoding/csv"
-	"fmt"
 	"github.com/sereiner/parrot/component"
 	"github.com/sereiner/parrot/context"
 	"github.com/sereiner/parrot/example/order"
 	"github.com/sereiner/parrot/parrot"
-	"go.uber.org/zap"
-	"net/http"
-	"time"
 )
 
 func main() {
@@ -18,47 +12,59 @@ func main() {
 	app := parrot.NewApp(
 		parrot.WithPlatName("apiserver"),
 		parrot.WithSystemName("apiserver"),
-		parrot.WithServerTypes("once-rpc-api"),
+		parrot.WithServerTypes("api-mqc"),
 		parrot.WithDebug())
 
-	app.Conf.RPC.SetMainConf(`{"address":":8032"}`)
+	app.Conf.RPC.SetMainConf(`{"address":":9001"}`)
 
-	app.Conf.ONCE.SetSubConf("task", `{"tasks":[{"cron":"@after 5s","service":"/order/query"}]}`)
 
-	//app.Conf.Plat.SetVarConf("ding", "ding", `{
-	//	"webhook":"https://oapi.dingtalk.com/robot/send?access_token=3340852f9ce446e6bed2cb8b32ea1a2fb30b8ded538dc1c2735d4d07730c5bc6",
-	//	"monitor":"http://monitor.manyoujing.net"
-	//}`)
+	app.Conf.MQC.SetSubConf("server", `
+		{
+			"proto":"nsq",
+			"addrs":["localhost:4151"],
+			"db":1,
+			"dial_timeout":10,
+			"read_timeout":10,
+			"write_timeout":10,
+			"pool_size":10
+	}
+	`)
+
+
+	app.Conf.MQC.SetSubConf("queue", `{
+	     "queues":[
+			{
+	           "queue":"test#ch",
+	           "service":"/mqc"
+			}
+	   ]
+	}`)
+
+	app.Conf.Plat.SetVarConf("queue", "queue", `
+		{
+			"proto":"nsq",
+			"addrs":["localhost:4151"],
+			"db":1,
+			"dial_timeout":10,
+			"read_timeout":10,
+			"write_timeout":10,
+			"pool_size":10
+	}
+	`)
+
 
 	app.Initializing(func(c component.IContainer) error {
 
 		return nil
 	})
 
-	app.Once("/order/query", order.NewQueryHandler)
-	app.Micro("/order", func(ctx *context.Context) (r interface{}) {
+
+	app.Micro("/order", order.NewQueryHandler)
+
+	app.MQC("/mqc", func(ctx *context.Context) (r interface{}) {
+		ctx.Log.Info(ctx.Request.GetBodyMap())
 		return "success"
 	})
-	app.Micro("/download", func(ctx *context.Context) (r interface{}) {
 
-		bytesBuffer := &bytes.Buffer{}
-
-		writer := csv.NewWriter(bytesBuffer)
-		writer.Write([]string{
-			"书名",
-		})
-
-		writer.Write([]string{
-			"heheh",
-		})
-
-		writer.Flush()
-
-		ctx.GinContext.Writer.Header().Set("Content-Disposition", fmt.Sprintf("attachment;filename=回收端上架报表-%s.csv", time.Now().Format("2006-01-02 15:04:05")))
-
-		zap.L().Info("3. 返回数据")
-		ctx.GinContext.Data(http.StatusOK, "text/csv", bytesBuffer.Bytes())
-		return
-	})
 	app.Start()
 }

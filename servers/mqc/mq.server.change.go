@@ -29,7 +29,7 @@ func (s *MqcServer) StopMetric() error {
 func (s *MqcServer) SetQueues(proto string, raw string, queues []*conf.Queue) (err error) {
 	s.Processor, err = s.getProcessor(proto, raw, queues)
 	if err != nil {
-		err = fmt.Errorf("queue设置有误:%v", err)
+		err = fmt.Errorf("test queue设置有误:%v", err)
 		return err
 	}
 	return nil

@@ -24,7 +24,7 @@ require (
 	github.com/pkg/profile v1.3.0
 	github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4 // indirect
 	github.com/schollz/progressbar/v2 v2.12.1 // indirect
-	github.com/sereiner/library v0.0.0-20191208104106-f74eb5876167
+	github.com/sereiner/library v0.0.0-20191208162151-380f475a5e31
 	github.com/shirou/gopsutil v2.19.6+incompatible // indirect
 	github.com/stretchr/testify v1.3.0
 	github.com/ugorji/go v1.1.4
@@ -34,7 +34,6 @@ require (
 	github.com/zkfy/cron v0.0.0-20170309132418-df38d32658d8
 	github.com/zkfy/go-oci8 v0.0.0-20180327092318-ad9f59dedff0
 	github.com/zkfy/log v0.0.0-20180312054228-b2704c3ef896
-	go.uber.org/zap v1.10.0
 	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980
 	golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a
 	google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8

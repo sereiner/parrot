@@ -16,7 +16,7 @@ func (s *MqcServer) getProcessor(addr string, raw string, queues []*conf.Queue) 
 		}
 	}()
 	if engine, err = NewProcessor(addr, raw, queues); err != nil {
-		return nil, err
+		return nil,fmt.Errorf("NewProcessor err:%v",err)
 	}
 	engine.Use(middleware.Logging(s.conf)) //记录请求日志
 	engine.Use(middleware.Recovery())
