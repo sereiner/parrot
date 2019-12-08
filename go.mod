@@ -24,7 +24,7 @@ require (
 	github.com/pkg/profile v1.3.0
 	github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4 // indirect
 	github.com/schollz/progressbar/v2 v2.12.1 // indirect
-	github.com/sereiner/library v0.0.0-20191208102109-247507706ba7
+	github.com/sereiner/library v0.0.0-20191208104106-f74eb5876167
 	github.com/shirou/gopsutil v2.19.6+incompatible // indirect
 	github.com/stretchr/testify v1.3.0
 	github.com/ugorji/go v1.1.4
