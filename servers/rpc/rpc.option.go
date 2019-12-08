@@ -9,6 +9,7 @@ import (
 type Handler interface {
 	Handle(*dispatcher.Context)
 }
+
 type option struct {
 	ip string
 	*logger.Logger

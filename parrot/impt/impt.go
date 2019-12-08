@@ -6,6 +6,7 @@ import (
 	_ "github.com/sereiner/library/cache/memcache"
 	_ "github.com/sereiner/library/cache/redis"
 	_ "github.com/sereiner/library/mq/mqtt"
+	_ "github.com/sereiner/library/mq/nsq"
 	_ "github.com/sereiner/library/mq/redis"
 	_ "github.com/sereiner/library/mq/stomp"
 	_ "github.com/sereiner/library/mq/xmq"

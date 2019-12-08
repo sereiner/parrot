@@ -114,6 +114,7 @@ func (w *Watcher) Close() {
 	w.done = true
 	close(w.closeChan)
 }
+
 func (w *Watcher) notifyDeleted() {
 	w.mu.Lock()
 	defer w.mu.Unlock()
@@ -123,6 +124,7 @@ func (w *Watcher) notifyDeleted() {
 
 	}
 }
+
 func (w *Watcher) notifyChanged(content []byte, version int32) {
 	w.mu.Lock()
 	defer w.mu.Unlock()
