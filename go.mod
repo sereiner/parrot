@@ -3,7 +3,6 @@ module github.com/sereiner/parrot
 go 1.13
 
 require (
-	code.cloudfoundry.org/bytefmt v0.0.0-20180906201452-2aa6f33b730c // indirect
 	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
 	github.com/dsnet/compress v0.0.1 // indirect
 	github.com/fsnotify/fsnotify v1.4.7
@@ -13,17 +12,15 @@ require (
 	github.com/gogo/protobuf v1.3.0 // indirect
 	github.com/golang/protobuf v1.3.2
 	github.com/golang/snappy v0.0.1
-	github.com/gorilla/websocket v1.4.0
+	github.com/gorilla/websocket v1.4.1
 	github.com/grpc-ecosystem/grpc-gateway v1.11.0 // indirect
 	github.com/json-iterator/go v1.1.7
 	github.com/mattn/go-isatty v0.0.9 // indirect
 	github.com/mattn/go-sqlite3 v1.11.0 // indirect
 	github.com/mholt/archiver v3.1.1+incompatible
 	github.com/nwaples/rardecode v1.0.0 // indirect
-	github.com/pierrec/cmdflag v0.0.2 // indirect
 	github.com/pkg/profile v1.3.0
 	github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4 // indirect
-	github.com/schollz/progressbar/v2 v2.12.1 // indirect
 	github.com/sereiner/library v0.0.0-20191208162151-380f475a5e31
 	github.com/shirou/gopsutil v2.19.6+incompatible // indirect
 	github.com/stretchr/testify v1.3.0
